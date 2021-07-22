@@ -1,0 +1,53 @@
+table {
+    width: 100%;
+  }
+  
+  .subtitle {
+      font-weight: bold;
+      margin-left:5px;
+      margin-right: 5px;
+      color: #5a85b9;
+      font-size: 25px;
+  }
+
+  .productInfo {
+    font-weight: 400;
+    font-size: 21px;
+
+    .productName {
+        font-weight: 400;
+        font-size: 18px;
+    }
+
+    .currentPrice {
+        font-size: 14px;
+        font-weight: bold;
+        padding-top: 3px;
+        color:#e6769c;
+    }
+  }
+  .logo {
+      width: 50px;
+      height: 50px;
+      margin-right: 10px;
+  }
+
+  .totalType {
+    font-weight: 400;
+    font-size: 11.2px
+  }
+  .totalNumber {
+    font-weight: 400;
+    font-size: 18px;
+  }
+
+  .positiveIcon {
+    transform: rotate(45deg );
+    color: #3cd4a0;
+  }
+
+  .negativeIcon {
+    transform: rotate(45deg );
+    color: #ff4081;
+  }
+
