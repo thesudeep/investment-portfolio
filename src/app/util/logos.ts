@@ -210,6 +210,10 @@ export const logos: any[] =   [
     {
       ticker: 'LINK',
       url: 'https://dynamic-assets.coinbase.com/9e34c547e363744ad9e5d140d098f498ee8959a2c175366765beb000c24695712697b3aa8d972e75e4d6c79a5c16e496a78fe30094638b1ad5fea45db71c82df/asset_icons/351b8b5f92576806a20692c98ae00c4d930117e44b26f217ab2bef5b29b3e312.png'
+    },
+    {
+      ticker: 'BNT',
+      url: 'https://dynamic-assets.coinbase.com/8a7dc03bcbe76c88007b58fae9b1e44aceb817075441731a644b5667479ded2f7f2650f47718408468e01135f77af780a75d429929ef2d9d6dddb3d91b102511/asset_icons/eef04e3ba9a5761f6624c549d4d0640b04e78fe937d58ea6a6ffbdf283e9b199.png'
     }
 
   ];

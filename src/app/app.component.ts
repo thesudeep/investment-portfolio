@@ -201,7 +201,7 @@ export class AppComponent {
     this.portfolio.totalGainLoss = 0;
     this.portfolio.totalCurrentValue = 0;
     this.portfolio.totalFees = 0;
-    
+    this.tickers = [];
   }
 
   search(event: any): void {

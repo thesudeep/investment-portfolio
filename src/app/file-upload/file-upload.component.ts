@@ -91,14 +91,13 @@ export class FileUploadComponent implements OnInit {
         currentValue:0
 
       }
-      // if(item.product === "MANA") {
+      // if(item.product === "FIL") {
       //   data.push(item);
       // }
       data.push(item);
 
     }
     return data;
-    // return data.sort((a: any, b: any) => b.date - a.date);
   }
 
 }
