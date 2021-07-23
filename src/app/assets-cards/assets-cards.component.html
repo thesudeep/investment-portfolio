@@ -52,8 +52,7 @@
         <div>
           <div class="d-flex">
             <div class="totalNumber">{{transaction.totalCurrentValue | currency: 'USD'}}</div>
-            <mat-icon *ngIf= "transaction.totalCurrentValue > 0" class="positiveIcon">arrow_upward</mat-icon>
-            <mat-icon *ngIf="transaction.totalCurrentValue < 0" class="negativeIcon">arrow_downward</mat-icon>
+            <mat-icon></mat-icon>
           </div>
           <div class="totalType">Current Value</div>
         </div>
