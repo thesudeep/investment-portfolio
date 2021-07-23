@@ -214,6 +214,11 @@ export const logos: any[] =   [
     {
       ticker: 'BNT',
       url: 'https://dynamic-assets.coinbase.com/8a7dc03bcbe76c88007b58fae9b1e44aceb817075441731a644b5667479ded2f7f2650f47718408468e01135f77af780a75d429929ef2d9d6dddb3d91b102511/asset_icons/eef04e3ba9a5761f6624c549d4d0640b04e78fe937d58ea6a6ffbdf283e9b199.png'
+    },
+    {
+      ticker: 'LPT',
+      url: 'https://dynamic-assets.coinbase.com/912c3554aaf15c2298ce3af061d09966e47c3a153d93c75bae3d48e458fe1cc1da9b42886f695c23e052f0b8e3d6e94ff9549beffca9ffbc37f3c5e1f22b8f3e/asset_icons/c8201d4ef2a3226f5e1920e8307fb3a3969926a0a97eb294463cb9e6ceb2ca52.png'
     }
+
 
   ];
