@@ -1,0 +1,83 @@
+<div class="d-flex justify-content-end">
+    <button mat-icon-button class="close-button" [mat-dialog-close]="true">
+        <mat-icon class="close-icon">close</mat-icon>
+    </button>
+</div>
+<div class="transaction-details-container">
+
+    <table mat-table [dataSource]="dataSource" class="example-table" matSort matSortActive="date" matSortDisableClear
+        matSortDirection="desc">
+        <ng-container matColumnDef="type">
+            <th mat-header-cell *matHeaderCellDef>Type</th>
+            <td mat-cell *matCellDef="let row">{{row.type}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="unitPrice">
+            <th mat-header-cell *matHeaderCellDef>Unit Price</th>
+            <td mat-cell *matCellDef="let row">{{row.unitPrice  | currency: 'USD'}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="fees">
+            <th mat-sort-header mat-header-cell *matHeaderCellDef>Fees</th>
+            <td mat-cell *matCellDef="let row">{{row.fees  | currency: 'USD'}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="quantity">
+            <th mat-sort-header mat-header-cell *matHeaderCellDef>Quantity</th>
+            <td mat-cell *matCellDef="let row">{{row.quantity}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="remaining">
+            <th mat-sort-header mat-header-cell *matHeaderCellDef>Remaining</th>
+            <td mat-cell *matCellDef="let row">{{row.remaining  | number : '1.2-2'}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="price">
+            <th mat-sort-header mat-header-cell *matHeaderCellDef>Price</th>
+            <td mat-cell *matCellDef="let row">{{row.price  | currency: 'USD'}}</td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="realizedGainLoss">
+            <th mat-sort-header mat-header-cell *matHeaderCellDef>Realized Gain/Loss</th>
+            <td mat-cell *matCellDef="let row">
+                <div class="d-flex">
+                    <mat-icon *ngIf="row.realizedGainLoss > 0" class="positiveIcon">arrow_upward</mat-icon>
+                    <mat-icon *ngIf="row.realizedGainLoss < 0" class="negativeIcon">arrow_downward</mat-icon>
+                    <mat-icon *ngIf="row.realizedGainLoss === 0"></mat-icon>
+                    <div>{{row.realizedGainLoss  | currency: 'USD'}}</div>
+                </div>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="unrealizedGainLoss">
+            <th mat-sort-header mat-header-cell *matHeaderCellDef>UnRealized Gain/Loss</th>
+            <td mat-cell *matCellDef="let row">
+                <div class="d-flex">
+                    <mat-icon *ngIf="row.unrealizedGainLoss > 0" class="positiveIcon">arrow_upward</mat-icon>
+                    <mat-icon *ngIf="row.unrealizedGainLoss < 0" class="negativeIcon">arrow_downward</mat-icon>
+                    <mat-icon *ngIf="row.unrealizedGainLoss === 0"></mat-icon>
+                    <div>{{row.unrealizedGainLoss  | currency: 'USD'}}</div>
+                </div>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="currentValue">
+            <th mat-sort-header mat-header-cell *matHeaderCellDef>Current Value</th>
+            <td mat-cell *matCellDef="let row">{{row.currentValue  | currency: 'USD'}}</td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="date">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
+                Created
+            </th>
+            <td mat-cell *matCellDef="let row">{{row.date | date: 'short'}}</td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns" style="position: sticky; position:0"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+</div>
+
+<mat-paginator [pageSize]="20" showFirstLastButtons></mat-paginator>

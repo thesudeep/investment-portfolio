@@ -68,7 +68,7 @@ export class PortfolioComponent implements OnInit {
   ];
   public timeInterval: Subscription;
 
-  constructor(private http: HttpClient,public dialog: MatDialog, public appService: AppService) { }
+  constructor(private http: HttpClient, public dialog: MatDialog, public appService: AppService) { }
 
   ngOnInit(): void {
     this.portfolio = {

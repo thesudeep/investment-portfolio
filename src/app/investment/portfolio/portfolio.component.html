@@ -76,30 +76,6 @@
   <div class="col-6 p-2" *ngFor="let ticker of tickers | searchFilter: searchTerm">
     <app-assets-cards [ticker]="ticker" [transaction]="portfolio.assets[ticker]"></app-assets-cards>
   </div>
-
-  <!-- <mat-accordion>
-            <mat-expansion-panel *ngFor="let transactionData of transactionMappedData">
-                <mat-expansion-panel-header>
-                  <mat-panel-title>
-                    {{transactionData.monthYear}}
-                  </mat-panel-title>
-                </mat-expansion-panel-header>
-                <div class="container">
-                    <div class="row g-0 main-section m-4">
-                        <mat-card>
-                          TOTAL
-                        </mat-card>
-                      </div>
-                  <div class="row">
-                    
-                    <div class="col-6" *ngFor="let ticker of transactionData.tickers">
-                      <app-assets-cards [ticker]="ticker" [transactionByMonthYearTicker]="transactionData.assets[ticker]"></app-assets-cards>                   
-                    </div>
-          
-                  </div>
-                </div>
-              </mat-expansion-panel>
-        </mat-accordion> -->
 </div>
 
 <mat-menu #menu="matMenu">

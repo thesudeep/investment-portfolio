@@ -9,17 +9,23 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatRadioModule  } from '@angular/material/radio';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { PortfolioComponent } from './portfolio/portfolio.component';
 import { AssetsCardsComponent } from './assets-cards/assets-cards.component';
 import { SearchFilterPipe } from './search-filter.pipe';
 import { FileUploadComponent } from './file-upload/file-upload.component';
+import { TransactionDetailsComponent } from './transaction-details/transaction-details.component';
 
 @NgModule({
   declarations: [
     PortfolioComponent,
     AssetsCardsComponent,
     SearchFilterPipe,
-    FileUploadComponent
+    FileUploadComponent,
+    TransactionDetailsComponent
 
   ],
   imports: [
@@ -32,7 +38,12 @@ import { FileUploadComponent } from './file-upload/file-upload.component';
     MatMenuModule,
     MatRadioModule,
     MatDialogModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatProgressSpinnerModule
+
 
   ]
 })

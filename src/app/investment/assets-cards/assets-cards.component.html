@@ -69,7 +69,7 @@
 
 <mat-menu #appMenu="matMenu">
     <ng-template matMenuContent>
-      <button mat-menu-item>Transactions</button>
+      <button mat-menu-item (click)="openTransactionDetails()">Transactions</button>
       <button mat-menu-item>Chart</button>
     </ng-template>
 </mat-menu>

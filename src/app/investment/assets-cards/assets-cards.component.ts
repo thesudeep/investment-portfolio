@@ -1,11 +1,15 @@
-import { AfterViewInit, Component, ViewChild, Input } from '@angular/core';
+import { AfterViewInit, Component, ViewChild, Input, ViewEncapsulation } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { logos }  from '../../util/logos'; 
+import { MatDialog } from '@angular/material/dialog';
+import { TransactionDetailsComponent } from '../transaction-details/transaction-details.component';
 @Component({
   selector: 'app-assets-cards',
   templateUrl: './assets-cards.component.html',
-  styleUrls: ['./assets-cards.component.scss']
+  styleUrls: ['./assets-cards.component.scss'],
+  encapsulation: ViewEncapsulation.None
+
 })
 export class AssetsCardsComponent implements AfterViewInit{
   // displayedColumns: string[] = ['date', 'unitPrice', 'fees', 'quantity', 'price'];
@@ -19,7 +23,7 @@ export class AssetsCardsComponent implements AfterViewInit{
 
   @ViewChild(MatPaginator) paginator: any;
 
-  constructor() {
+  constructor(public dialog: MatDialog) {
 
   }
   ngOnInit(): void {
@@ -36,18 +40,21 @@ export class AssetsCardsComponent implements AfterViewInit{
     // this.dataSource.paginator = this.paginator;
   }
 
-  toggleDetails() {
-    this.showDetail = !this.showDetail;
+  // toggleDetails() {
+  //   this.showDetail = !this.showDetail;
+  // }
+
+  openTransactionDetails() {
+    const dialogRef = this.dialog.open(TransactionDetailsComponent, {
+      width: '1250px',
+      height: 'auto',
+      panelClass: 'transaction-details-dialog', 
+      data: { logoUrl: this.logoUrl, transaction: this.transaction }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+    });
   }
 
-}
-
-export interface AssetsElement {
-  date: string;
-  product: string;
-  unitPrice: number;
-  fees: number;
-  quantity: number;
-  price: number;
 }
 
