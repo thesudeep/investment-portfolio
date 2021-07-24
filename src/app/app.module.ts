@@ -8,6 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatButtonModule } from '@angular/material/button';
 import { HttpClientModule } from '@angular/common/http';
 import { ProgressComponent } from './progress/progress.component';
 
@@ -23,6 +24,7 @@ import { ProgressComponent } from './progress/progress.component';
     BrowserAnimationsModule,
     MatIconModule,
     MatSlideToggleModule,
+    MatButtonModule,
     ReactiveFormsModule,
     InvestmentModule
   ],

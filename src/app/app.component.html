@@ -1,6 +1,6 @@
 <div class="mat-app-background" form="form" style="min-height:100%">
-  <nav class="d-flex align-items-center">
-    <div class="flex-grow-1 m-0 pt-2 pb-2">
+  <nav class="d-flex align-items-center justify-content-between">
+    <div class="m-0 pt-2 pb-2">
       <svg viewBox="0 0 311 78.59973451903241" height="62" width="311">
         <defs id="SvgjsDefs1947"></defs>
         <g id="SvgjsG1948" featurekey="symbolFeature-0"
@@ -30,13 +30,11 @@
         </g>
       </svg>
     </div>
-    <div class="d-flex">
-      <mat-icon (click)="updateTheme(true)" class="mr-8"
-        [ngStyle]="{'cursor':toggleControl.value === true ? 'none' : 'pointer' }">brightness_5</mat-icon>
-      <mat-slide-toggle [formControl]="toggleControl" class="mr-8">
+    <div class="d-flex align-items-center">
+      <mat-slide-toggle [formControl]="toggleControl" class="m-0">
+        <button mat-stroked-button color="primary" class="m-2" [routerLink]="['/portfolio']">Investment Portfolio</button>
+        <button mat-stroked-button color="primary" class="m-2">Stock Prediction</button>
       </mat-slide-toggle>
-      <mat-icon (click)="updateTheme(false)" [ngStyle]="{'cursor':toggleControl.value === true ? 'pointer' : 'none' }">
-        bedtime</mat-icon>
     </div>
   </nav>
   <router-outlet></router-outlet>
