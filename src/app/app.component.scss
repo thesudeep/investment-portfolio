@@ -2,36 +2,4 @@ nav {
     border-bottom: 1px solid #BBB;
 }
 
-.main-section {
-    // height: calc(100vh - 79px);
-}
 
-.totalType {
-    font-weight: bold;
-    font-size: 12px
-  }
-  .totalNumber {
-    font-weight: bold;
-    font-size: 25px;
-  }
-
-  .positiveIcon {
-    transform: rotate(45deg);
-    color: #3cd4a0;
-    font-weight: bold;
-  }
-
-  .negativeIcon {
-    transform: rotate(45deg);
-    color: #ff4081;
-    font-weight: bold;
-  }
-
-
-
-.currentPrice {
-    font-size: 14px;
-    font-weight: bold;
-    padding-top: 3px;
-    color:#e6769c;
-}

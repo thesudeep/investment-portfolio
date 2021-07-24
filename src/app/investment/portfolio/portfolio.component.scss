@@ -1,0 +1,29 @@
+.totalType {
+    font-weight: bold;
+    font-size: 12px
+  }
+  .totalNumber {
+    font-weight: bold;
+    font-size: 22px;
+  }
+
+  .positiveIcon {
+    transform: rotate(45deg);
+    color: #3cd4a0;
+    font-weight: bold;
+  }
+
+  .negativeIcon {
+    transform: rotate(45deg);
+    color: #ff4081;
+    font-weight: bold;
+  }
+
+
+
+.currentPrice {
+    font-size: 14px;
+    font-weight: bold;
+    padding-top: 3px;
+    color:#e6769c;
+}

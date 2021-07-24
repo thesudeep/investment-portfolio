@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, ViewChild, Input } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { logos }  from '../util/logos'; 
+import { logos }  from '../../util/logos'; 
 @Component({
   selector: 'app-assets-cards',
   templateUrl: './assets-cards.component.html',

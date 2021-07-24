@@ -45,10 +45,17 @@
             <div class="totalNumber">{{transaction.totalUnrealizedGainLoss | currency: 'USD'}}</div>
             <mat-icon *ngIf= "transaction.totalUnrealizedGainLoss > 0" class="positiveIcon">arrow_upward</mat-icon>
             <mat-icon *ngIf="transaction.totalUnrealizedGainLoss < 0" class="negativeIcon">arrow_downward</mat-icon>
-
           </div>
           <div class="totalType">Unrealized Gain/Loss</div>
         </div>
+        <div>
+            <div class="d-flex">
+              <div class="totalNumber">{{transaction.totalGainLoss | currency: 'USD'}}</div>
+              <mat-icon *ngIf= "transaction.totalGainLoss > 0" class="positiveIcon">arrow_upward</mat-icon>
+              <mat-icon *ngIf="transaction.totalGainLoss < 0" class="negativeIcon">arrow_downward</mat-icon>
+            </div>
+            <div class="totalType">Current Gain/Loss</div>
+          </div>
         <div>
           <div class="d-flex">
             <div class="totalNumber">{{transaction.totalCurrentValue | currency: 'USD'}}</div>
