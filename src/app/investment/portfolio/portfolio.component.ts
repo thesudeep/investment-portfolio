@@ -14,7 +14,7 @@ import { FileUploadComponent } from '../file-upload/file-upload.component';
 export class PortfolioComponent implements OnInit {
 
   public portfolio: any;
-  public tickers: any = [];
+  public sortedTickers: any = [];
   public searchTerm: string = '';
   public sortedOptions = [
     {
@@ -66,6 +66,9 @@ export class PortfolioComponent implements OnInit {
       orderIndex: -1
     }
   ];
+
+  public selectedSortedValue = 7;
+
   public timeInterval: Subscription;
 
   constructor(private http: HttpClient, public dialog: MatDialog, public appService: AppService) { }
@@ -96,7 +99,7 @@ export class PortfolioComponent implements OnInit {
     this.portfolio.totalGainLoss = 0;
     this.portfolio.totalCurrentValue = 0;
     this.portfolio.totalFees = 0;
-    this.tickers = [];
+    this.sortedTickers = [];
   }
 
   search(event: any): void {
@@ -104,8 +107,8 @@ export class PortfolioComponent implements OnInit {
   }
 
   onSorted(event: any): void {
-    console.log(event);
-    const selectedSortedItem = this.sortedOptions.find((item: any) => item.value === event.value);
+    this.selectedSortedValue = event.value;
+    const selectedSortedItem = this.sortedOptions.find((item: any) => item.value === this.selectedSortedValue);
     if(selectedSortedItem) {
       let items: any[] = [];
       Object.keys(this.portfolio.assets).forEach((item)=>{
@@ -120,13 +123,13 @@ export class PortfolioComponent implements OnInit {
         }
         return b.value - a.value
       })
-      this.tickers = sortedTickers.map((item: any) => item.name);
+      this.sortedTickers = sortedTickers.map((item: any) => item.name);
     }
   }
 
   openDialog(): void {
     const dialogRef = this.dialog.open(FileUploadComponent, {
-      width: '600px',
+      width: '800px',
       height: 'auto',
       data: {}
     });
@@ -146,20 +149,20 @@ export class PortfolioComponent implements OnInit {
       let transactionData = JSON.parse(localData);
       const groupByTicker = groupBy("product");
       this.portfolio.assets = groupByTicker(transactionData);
-      this.tickers = Object.keys(this.portfolio.assets);
       this.calculateAggregations();
     }
 
   }
 
   private calculateAggregations() {
+    let tickers = Object.keys(this.portfolio.assets)
     let totalRealizedGainLoss = 0;
     let totalUnrealizedGainLoss = 0;
     let totalGainLoss = 0;
     let totalCurrentValue = 0;
     let totalFees = 0;
-    this.getCurrentPrice(`https://min-api.cryptocompare.com/data/pricemulti?fsyms=${this.tickers.join(",")}&tsyms=USD`).subscribe(currentPrices => {
-      this.tickers.forEach((ticker: string) => {
+    this.getCurrentPrice(`https://min-api.cryptocompare.com/data/pricemulti?fsyms=${tickers.join(",")}&tsyms=USD`).subscribe(currentPrices => {
+      tickers.forEach((ticker: string) => {
         let transactions = this.portfolio.assets[ticker].sort((a: any, b: any) =>{
           let d1:any = new Date(a.date);
           let d2:any = new Date(b.date);
@@ -218,8 +221,8 @@ export class PortfolioComponent implements OnInit {
 
   
       });
+      this.onSorted({value: this.selectedSortedValue}); //sorted by highest value
       });
-
   }
 
   private updateRealizedGainLoss(totalSoldQuantity: number, purchaseUnitPrice: number, purchaseUnitFees: number, salesUnitPrice: number, salesUnitFees: number): number {

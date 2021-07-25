@@ -73,7 +73,7 @@
 </div>
 
 <div class="row g-0">
-  <div class="col-6 p-2" *ngFor="let ticker of tickers | searchFilter: searchTerm">
+  <div class="col-6 p-2" *ngFor="let ticker of sortedTickers | searchFilter: searchTerm">
     <app-assets-cards [ticker]="ticker" [transaction]="portfolio.assets[ticker]"></app-assets-cards>
   </div>
 </div>
