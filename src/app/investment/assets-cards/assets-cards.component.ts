@@ -1,6 +1,5 @@
-import { AfterViewInit, Component, ViewChild, Input, ViewEncapsulation } from '@angular/core';
+import { Component, ViewChild, Input, ViewEncapsulation } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatTableDataSource } from '@angular/material/table';
 import { logos }  from '../../util/logos'; 
 import { MatDialog } from '@angular/material/dialog';
 import { TransactionDetailsComponent } from '../transaction-details/transaction-details.component';
@@ -11,15 +10,13 @@ import { TransactionDetailsComponent } from '../transaction-details/transaction-
   encapsulation: ViewEncapsulation.None
 
 })
-export class AssetsCardsComponent implements AfterViewInit{
-  // displayedColumns: string[] = ['date', 'unitPrice', 'fees', 'quantity', 'price'];
-  // dataSource = new MatTableDataSource<any>()
+export class AssetsCardsComponent {
+
   showDetail: boolean = false; 
   logoUrl: string = '';
 
   @Input() ticker: any;
   @Input() transaction: any;
-  // @Input() transactionByMonthYearTicker: any;
 
   @ViewChild(MatPaginator) paginator: any;
 
@@ -28,28 +25,14 @@ export class AssetsCardsComponent implements AfterViewInit{
   }
   ngOnInit(): void {
     this.logoUrl = logos.find((logo: any) => logo.ticker === this.ticker)? logos.find((logo: any) => logo.ticker === this.ticker).url : '';
-
-    // this.transactionByMonthYearTicker.forEach((item: any) => {
-    //   this.dataSource.data.push(item);
-    // });
-
-    // console.log(this.transactionByMonthYearTicker)
   }
 
-  ngAfterViewInit() {
-    // this.dataSource.paginator = this.paginator;
-  }
-
-  // toggleDetails() {
-  //   this.showDetail = !this.showDetail;
-  // }
-
-  openTransactionDetails() {
+   openTransactionDetails() {
     const dialogRef = this.dialog.open(TransactionDetailsComponent, {
       width: '1250px',
       height: 'auto',
       panelClass: 'transaction-details-dialog', 
-      data: { logoUrl: this.logoUrl, transaction: this.transaction }
+      data: { logoUrl: this.logoUrl, ticker: this.ticker, transaction: this.transaction }
     });
 
     dialogRef.afterClosed().subscribe(result => {

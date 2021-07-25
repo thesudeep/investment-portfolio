@@ -1,4 +1,64 @@
-<div class="d-flex justify-content-end">
+<div class="d-flex justify-content-between">
+    <div class="d-flex justify-content-between mt-4">
+        <div class="d-flex productInfo mx-4">
+            <div class="d-flex">
+                <img class='logo' [src]="data.logoUrl" />
+            </div>
+            <div>
+                <div class="productName">{{data.ticker}}</div>
+                <div class="currentPrice">{{data.transaction.currentPrice | currency: 'USD': 'symbol': '1.2-4'}}</div>
+            </div>
+        </div>
+        <div class="mx-4">
+            <div class="d-flex align-items-center">
+                <div class="totalNumber">{{data.transaction.remaining | number : '1.2-2'}}</div>
+                <mat-icon></mat-icon>
+            </div>
+            <div class="totalType">Remaining</div>
+        </div>
+        <div class="mx-4">
+            <div class="d-flex align-items-center">
+                <div class="totalNumber">{{data.transaction.totalFees | currency: 'USD'}}</div>
+                <mat-icon></mat-icon>
+            </div>
+            <div class="totalType">Fees</div>
+        </div>
+        <div class="mx-4">
+            <div class="d-flex">
+                <div class="totalNumber">{{data.transaction.totalRealizedGainLoss | currency: 'USD'}}1</div>
+                <mat-icon *ngIf="data.transaction.totalRealizedGainLoss > 0" class="positiveIcon">arrow_upward
+                </mat-icon>
+                <mat-icon *ngIf="data.transaction.totalRealizedGainLoss < 0" class="negativeIcon">arrow_downward
+                </mat-icon>
+            </div>
+            <div class="totalType">Realized Gain/Loss</div>
+        </div>
+        <div class="mx-4">
+            <div class="d-flex">
+                <div class="totalNumber">{{data.transaction.totalUnrealizedGainLoss | currency: 'USD'}}</div>
+                <mat-icon *ngIf="data.transaction.totalUnrealizedGainLoss > 0" class="positiveIcon">arrow_upward
+                </mat-icon>
+                <mat-icon *ngIf="data.transaction.totalUnrealizedGainLoss < 0" class="negativeIcon">arrow_downward
+                </mat-icon>
+            </div>
+            <div class="totalType">Unrealized Gain/Loss</div>
+        </div>
+        <div class="mx-4">
+            <div class="d-flex">
+                <div class="totalNumber">{{data.transaction.totalGainLoss | currency: 'USD'}}</div>
+                <mat-icon *ngIf="data.transaction.totalGainLoss > 0" class="positiveIcon">arrow_upward</mat-icon>
+                <mat-icon *ngIf="data.transaction.totalGainLoss < 0" class="negativeIcon">arrow_downward</mat-icon>
+            </div>
+            <div class="totalType">Current Gain/Loss</div>
+        </div>
+        <div class="mx-4">
+            <div class="d-flex">
+                <div class="totalNumber">{{data.transaction.totalCurrentValue | currency: 'USD'}}</div>
+                <mat-icon></mat-icon>
+            </div>
+            <div class="totalType">Current Value</div>
+        </div>
+    </div>
     <button mat-icon-button class="close-button" [mat-dialog-close]="true">
         <mat-icon class="close-icon">close</mat-icon>
     </button>
@@ -75,7 +135,7 @@
             <td mat-cell *matCellDef="let row">{{row.date | date: 'short'}}</td>
         </ng-container>
 
-        <tr mat-header-row *matHeaderRowDef="displayedColumns" style="position: sticky; position:0"></tr>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
 </div>
