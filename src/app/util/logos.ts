@@ -226,6 +226,14 @@ export const logos: any[] =   [
     {
       ticker: 'ETH',
       url: 'https://dynamic-assets.coinbase.com/dbb4b4983bde81309ddab83eb598358eb44375b930b94687ebe38bc22e52c3b2125258ffb8477a5ef22e33d6bd72e32a506c391caa13af64c00e46613c3e5806/asset_icons/4113b082d21cc5fab17fc8f2d19fb996165bcce635e6900f7fc2d57c4ef33ae9.png'
+    },
+    {
+      ticker: 'POLY',
+      url: 'https://dynamic-assets.coinbase.com/7f1b216f0d206521953cd29366fcf460b7bfe5bb18c86c122a3cac5254f5eda5360cb187e5791e192b6713b15886fa3d9d2d3328f4e5d16d7b2790ed3d1f5035/asset_icons/2dac3c648db5ff58bd7f7dacbe3df78f9a2d43fe6413416bed7c5b1c641af95f.png'
+    },
+    {
+      ticker: 'CLV',
+      url: 'https://dynamic-assets.coinbase.com/2a43e81b3aa4ed326b3403253912cde99823a7bfab1e3df4aa42783a0e418c689663455524e679b892871a0c304a1025ec831c7eec619a7dca4b43a2e7df0b34/asset_icons/556d89987c2bf38e5b8d2a71636215c78cb3398ff7cf99219f67741b36a892cd.png'
     }
 
 
