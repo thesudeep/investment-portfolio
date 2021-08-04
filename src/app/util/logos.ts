@@ -234,6 +234,10 @@ export const logos: any[] =   [
     {
       ticker: 'CLV',
       url: 'https://dynamic-assets.coinbase.com/2a43e81b3aa4ed326b3403253912cde99823a7bfab1e3df4aa42783a0e418c689663455524e679b892871a0c304a1025ec831c7eec619a7dca4b43a2e7df0b34/asset_icons/556d89987c2bf38e5b8d2a71636215c78cb3398ff7cf99219f67741b36a892cd.png'
+    },
+    {
+      ticker: 'FARM',
+      url: 'https://dynamic-assets.coinbase.com/ab4ef5f960f61174746d888b3920ac345d0d859a275a15564714c893c3053c51aff35ce85d4effa3f07f6b5e3d189a9bf344a0064dc5716546864b1f956af21e/asset_icons/9f05b03eb6bbfec5f92203fec9845cf480051a98b51ce715d48d5f76cae0ae2e.png'
     }
 
 
