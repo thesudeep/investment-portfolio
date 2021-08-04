@@ -8,48 +8,63 @@
 
       <div class="d-flex product-stats">
         <div>
+          <div
+            [ngClass]="transaction.stats.stats_24hour.last > transaction.stats.stats_24hour.open  ? 'highPrice' : 'lowPrice'"
+            class="price">
+            {{transaction.stats.stats_24hour.last | currency: 'USD': 'symbol': '1.2-4'}}
+          </div>
           <div>
             Current
           </div>
-          <div [ngClass]="transaction.stats.stats_24hour.last > transaction.stats.stats_24hour.open  ? 'highPrice' : 'lowPrice'" class="price">
-            {{transaction.stats.stats_24hour.last | currency: 'USD': 'symbol': '1.2-4'}}
-          </div>
+
         </div>
 
         <div>
+          <div
+            [ngClass]="transaction.stats.stats_24hour.last > transaction.stats.stats_24hour.open  ? 'highPrice' : 'lowPrice'"
+            class="price">
+            {{transaction.stats.stats_24hour.open | currency: 'USD': 'symbol': '1.2-4'}}
+          </div>
           <div>
             Open
           </div>
-          <div [ngClass]="transaction.stats.stats_24hour.last > transaction.stats.stats_24hour.open  ? 'highPrice' : 'lowPrice'" class="price">
-            {{transaction.stats.stats_24hour.open | currency: 'USD': 'symbol': '1.2-4'}}
-          </div>
+
         </div>
 
         <div>
+          <div
+            [ngClass]="transaction.stats.stats_24hour.last > transaction.stats.stats_24hour.open  ? 'highPrice' : 'lowPrice'"
+            class="price">
+            {{transaction.stats.stats_24hour.low | currency: 'USD': 'symbol': '1.2-4'}}
+          </div>
           <div>
             Low
           </div>
-          <div [ngClass]="transaction.stats.stats_24hour.last > transaction.stats.stats_24hour.open  ? 'highPrice' : 'lowPrice'" class="price">
-            {{transaction.stats.stats_24hour.low | currency: 'USD': 'symbol': '1.2-4'}}
-          </div>
+
         </div>
 
         <div>
+          <div
+            [ngClass]="transaction.stats.stats_24hour.last > transaction.stats.stats_24hour.open  ? 'highPrice' : 'lowPrice'"
+            class="price">
+            {{transaction.stats.stats_24hour.high | currency: 'USD': 'symbol': '1.2-4'}}
+          </div>
           <div>
             High
           </div>
-          <div [ngClass]="transaction.stats.stats_24hour.last > transaction.stats.stats_24hour.open  ? 'highPrice' : 'lowPrice'" class="price">
-            {{transaction.stats.stats_24hour.high | currency: 'USD': 'symbol': '1.2-4'}}
-          </div>
+
         </div>
 
         <div>
+          <div
+            [ngClass]="transaction.stats.stats_24hour.last > transaction.stats.stats_24hour.open  ? 'highPrice' : 'lowPrice'"
+            class="price">
+            {{transaction.stats.stats_24hour.volume | shortNumber}}
+          </div>
           <div>
             Volume
           </div>
-          <div [ngClass]="transaction.stats.stats_24hour.last > transaction.stats.stats_24hour.open  ? 'highPrice' : 'lowPrice'" class="price">
-            {{transaction.stats.stats_24hour.volume | shortNumber}}
-          </div>
+
         </div>
       </div>
       <button mat-icon-button [matMenuTriggerFor]="appMenu">
