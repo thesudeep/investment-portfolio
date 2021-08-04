@@ -86,7 +86,7 @@ export class PortfolioComponent implements OnInit {
       this.initializeData();
     })
     this.initializeData();
-    this.timeInterval = interval(3000).pipe().subscribe(()=>{
+    this.timeInterval = interval(10000).pipe().subscribe(()=>{
       this.calculateAggregations();
     });
   }
@@ -147,7 +147,7 @@ export class PortfolioComponent implements OnInit {
     let localData = window.localStorage.getItem('transactionsData');
     if (localData) {
       let transactionData = JSON.parse(localData);
-      const groupByTicker = groupBy("product");
+      const groupByTicker = groupBy("productName");
       this.portfolio.assets = groupByTicker(transactionData);
       this.calculateAggregations();
     }
@@ -161,7 +161,7 @@ export class PortfolioComponent implements OnInit {
     let totalGainLoss = 0;
     let totalCurrentValue = 0;
     let totalFees = 0;
-    this.getCurrentPrice(`https://min-api.cryptocompare.com/data/pricemulti?fsyms=${tickers.join(",")}&tsyms=USD`).subscribe(currentPrices => {
+    this.getCurrentPrice(`https://api.pro.coinbase.com/products/stats`).subscribe(productStats => {
       tickers.forEach((ticker: string) => {
         let transactions = this.portfolio.assets[ticker].sort((a: any, b: any) =>{
           let d1:any = new Date(a.date);
@@ -190,7 +190,7 @@ export class PortfolioComponent implements OnInit {
             }
             // calculate unrealized gain/loss
             if(transactions[i].remaining>0){
-              let currentPrice = currentPrices[ticker]["USD"];
+              let currentPrice = this.getLastPrice(productStats, transactions[i].product);
               let unrealizedGainLossSellPrice = transactions[i].remaining * currentPrice;
               let unrealizedGainLossPurchasePrice = transactions[i].remaining*transactions[i].unitPrice + transactions[i].unitFees;
               transactions[i].unrealizedGainLoss = unrealizedGainLossSellPrice - unrealizedGainLossPurchasePrice;
@@ -204,7 +204,7 @@ export class PortfolioComponent implements OnInit {
         this.portfolio.assets[ticker].totalGainLoss = this.portfolio.assets[ticker].totalRealizedGainLoss + this.portfolio.assets[ticker].totalUnrealizedGainLoss;
         this.portfolio.assets[ticker].remaining = this.portfolio.assets[ticker].reduce((a: number, b: any) => +a + +b.remaining, 0);
         this.portfolio.assets[ticker].totalCurrentValue = this.portfolio.assets[ticker].reduce((a: number, b: any) => +a + +b.currentValue, 0);
-        this.portfolio.assets[ticker].currentPrice = currentPrices[ticker]["USD"];
+        this.portfolio.assets[ticker].stats = this.getStats(productStats, `${ticker}`);
         this.portfolio.assets[ticker].totalFees = this.portfolio.assets[ticker].reduce((a: number, b: any) => +a + +b.fees, 0);
   
         totalRealizedGainLoss += this.portfolio.assets[ticker].totalRealizedGainLoss;
@@ -222,6 +222,7 @@ export class PortfolioComponent implements OnInit {
   
       });
       this.onSorted({value: this.selectedSortedValue}); //sorted by highest value
+      console.log(this.portfolio)
       });
   }
 
@@ -231,6 +232,16 @@ export class PortfolioComponent implements OnInit {
 
   private getCurrentPrice(url: string): Observable<any> {
     return this.http.get<any>(url);
+  }
+
+  private getLastPrice(productStats: any, ticker: string) {
+    console.log(ticker)
+    return productStats[ticker]["stats_24hour"]["last"];
+  }
+
+  private getStats(productStats: any, ticker: string) {
+    let stats = productStats[`${ticker}-USD`] || productStats[`${ticker}-USDC`];
+    return stats;
   }
 
 }

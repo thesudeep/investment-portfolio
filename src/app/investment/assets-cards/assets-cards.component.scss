@@ -18,12 +18,14 @@ table {
         font-weight: 400;
         font-size: 18px;
     }
-
-    .currentPrice {
-        font-size: 14px;
-        font-weight: bold;
-        padding-top: 3px;
-        color:#e6769c;
+    .price{
+      font-size: 13px;
+    }
+    .highPrice {
+      color: #3cd4a0;
+    }
+    .lowPrice {
+      color: #ff4081;
     }
   }
   .logo {
@@ -53,4 +55,10 @@ table {
 
  .transaction-details-dialog .mat-dialog-container {
     padding: 0px;
+  }
+
+  .product-stats {
+    font-size: 11px;
+    width: 55%;
+    justify-content: space-evenly;
   }

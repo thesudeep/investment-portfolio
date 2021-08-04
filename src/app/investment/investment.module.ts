@@ -18,6 +18,7 @@ import { AssetsCardsComponent } from './assets-cards/assets-cards.component';
 import { SearchFilterPipe } from './search-filter.pipe';
 import { FileUploadComponent } from './file-upload/file-upload.component';
 import { TransactionDetailsComponent } from './transaction-details/transaction-details.component';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -42,9 +43,8 @@ import { TransactionDetailsComponent } from './transaction-details/transaction-d
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
-    MatProgressSpinnerModule
-
-
+    MatProgressSpinnerModule,
+    SharedModule
   ]
 })
 export class InvestmentModule { }

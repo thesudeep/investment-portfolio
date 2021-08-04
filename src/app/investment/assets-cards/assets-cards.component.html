@@ -1,75 +1,119 @@
 <mat-card class="mat-card mat-focus-indicator">
-    <mat-card-title class="mat-card-title d-flex align-items-center justify-content-between">
-      <div class="d-flex productInfo">
-        <div class="d-flex">
-            <img class='logo'
-            [src]="logoUrl" />  
-        </div>
-        <div>
-          <div class="productName">{{ticker}}</div>
-          <div class="currentPrice">{{transaction.currentPrice | currency: 'USD': 'symbol': '1.2-4'}}</div>
-        </div>
+  <mat-card-title class="mat-card-title">
+    <div class="d-flex align-items-center justify-content-between productInfo">
+      <div class="d-flex align-items-center">
+        <img class='logo' [src]="logoUrl" />
+        <div class="productName">{{ticker}}</div>
       </div>
 
+      <div class="d-flex product-stats">
+        <div>
+          <div>
+            Current
+          </div>
+          <div [ngClass]="transaction.stats.stats_24hour.last > transaction.stats.stats_24hour.open  ? 'highPrice' : 'lowPrice'" class="price">
+            {{transaction.stats.stats_24hour.last | currency: 'USD': 'symbol': '1.2-4'}}
+          </div>
+        </div>
+
+        <div>
+          <div>
+            Open
+          </div>
+          <div [ngClass]="transaction.stats.stats_24hour.last > transaction.stats.stats_24hour.open  ? 'highPrice' : 'lowPrice'" class="price">
+            {{transaction.stats.stats_24hour.open | currency: 'USD': 'symbol': '1.2-4'}}
+          </div>
+        </div>
+
+        <div>
+          <div>
+            Low
+          </div>
+          <div [ngClass]="transaction.stats.stats_24hour.last > transaction.stats.stats_24hour.open  ? 'highPrice' : 'lowPrice'" class="price">
+            {{transaction.stats.stats_24hour.low | currency: 'USD': 'symbol': '1.2-4'}}
+          </div>
+        </div>
+
+        <div>
+          <div>
+            High
+          </div>
+          <div [ngClass]="transaction.stats.stats_24hour.last > transaction.stats.stats_24hour.open  ? 'highPrice' : 'lowPrice'" class="price">
+            {{transaction.stats.stats_24hour.high | currency: 'USD': 'symbol': '1.2-4'}}
+          </div>
+        </div>
+
+        <div>
+          <div>
+            Volume
+          </div>
+          <div [ngClass]="transaction.stats.stats_24hour.last > transaction.stats.stats_24hour.open  ? 'highPrice' : 'lowPrice'" class="price">
+            {{transaction.stats.stats_24hour.volume | shortNumber}}
+          </div>
+        </div>
+      </div>
       <button mat-icon-button [matMenuTriggerFor]="appMenu">
         <mat-icon>more_vert</mat-icon>
       </button>
 
-    </mat-card-title>
-    <mat-card-content>
-      <div class="d-flex justify-content-between mt-4">
-        <div>
-          <div class="d-flex align-items-center">
-            <div class="totalNumber">{{transaction.remaining | number : '1.2-2'}}</div>
-            <mat-icon></mat-icon>
-          </div>
-          <div class="totalType">Remaining</div>
+    </div>
+
+
+  </mat-card-title>
+  <mat-card-content>
+    <div class="d-flex justify-content-between mt-4 pt-3">
+      <div>
+        <div class="d-flex align-items-center">
+          <div class="totalNumber">{{transaction.remaining | number : '1.2-2'}}</div>
+          <mat-icon></mat-icon>
         </div>
-        <div>
-          <div class="d-flex align-items-center">
-            <div class="totalNumber">{{transaction.totalFees | currency: 'USD'}}</div>
-            <mat-icon></mat-icon>
-          </div>
-          <div class="totalType">Fees</div>
-        </div>
-        <div>
-          <div class="d-flex">
-            <div class="totalNumber">{{transaction.totalRealizedGainLoss | currency: 'USD'}}1</div>
-            <mat-icon *ngIf= "transaction.totalRealizedGainLoss > 0" class="positiveIcon">arrow_upward</mat-icon>
-            <mat-icon *ngIf="transaction.totalRealizedGainLoss < 0" class="negativeIcon">arrow_downward</mat-icon>
-          </div>
-          <div class="totalType">Realized Gain/Loss</div>
-        </div>
-        <div>
-          <div class="d-flex">
-            <div class="totalNumber">{{transaction.totalUnrealizedGainLoss | currency: 'USD'}}</div>
-            <mat-icon *ngIf= "transaction.totalUnrealizedGainLoss > 0" class="positiveIcon">arrow_upward</mat-icon>
-            <mat-icon *ngIf="transaction.totalUnrealizedGainLoss < 0" class="negativeIcon">arrow_downward</mat-icon>
-          </div>
-          <div class="totalType">Unrealized Gain/Loss</div>
-        </div>
-        <div>
-            <div class="d-flex">
-              <div class="totalNumber">{{transaction.totalGainLoss | currency: 'USD'}}</div>
-              <mat-icon *ngIf= "transaction.totalGainLoss > 0" class="positiveIcon">arrow_upward</mat-icon>
-              <mat-icon *ngIf="transaction.totalGainLoss < 0" class="negativeIcon">arrow_downward</mat-icon>
-            </div>
-            <div class="totalType">Current Gain/Loss</div>
-          </div>
-        <div>
-          <div class="d-flex">
-            <div class="totalNumber">{{transaction.totalCurrentValue | currency: 'USD'}}</div>
-            <mat-icon></mat-icon>
-          </div>
-          <div class="totalType">Current Value</div>
-        </div>
+        <div class="totalType">Remaining</div>
       </div>
-    </mat-card-content>
-  </mat-card>
+      <div>
+        <div class="d-flex align-items-center">
+          <div class="totalNumber">{{transaction.totalFees | currency: 'USD'}}</div>
+          <mat-icon></mat-icon>
+        </div>
+        <div class="totalType">Fees</div>
+      </div>
+      <div>
+        <div class="d-flex">
+          <div class="totalNumber">{{transaction.totalRealizedGainLoss | currency: 'USD'}}1</div>
+          <mat-icon *ngIf="transaction.totalRealizedGainLoss > 0" class="positiveIcon">arrow_upward</mat-icon>
+          <mat-icon *ngIf="transaction.totalRealizedGainLoss < 0" class="negativeIcon">arrow_downward</mat-icon>
+        </div>
+        <div class="totalType">Realized Gain/Loss</div>
+      </div>
+      <div>
+        <div class="d-flex">
+          <div class="totalNumber">{{transaction.totalUnrealizedGainLoss | currency: 'USD'}}</div>
+          <mat-icon *ngIf="transaction.totalUnrealizedGainLoss > 0" class="positiveIcon">arrow_upward</mat-icon>
+          <mat-icon *ngIf="transaction.totalUnrealizedGainLoss < 0" class="negativeIcon">arrow_downward</mat-icon>
+        </div>
+        <div class="totalType">Unrealized Gain/Loss</div>
+      </div>
+      <div>
+        <div class="d-flex">
+          <div class="totalNumber">{{transaction.totalGainLoss | currency: 'USD'}}</div>
+          <mat-icon *ngIf="transaction.totalGainLoss > 0" class="positiveIcon">arrow_upward</mat-icon>
+          <mat-icon *ngIf="transaction.totalGainLoss < 0" class="negativeIcon">arrow_downward</mat-icon>
+        </div>
+        <div class="totalType">Current Gain/Loss</div>
+      </div>
+      <div>
+        <div class="d-flex">
+          <div class="totalNumber">{{transaction.totalCurrentValue | currency: 'USD'}}</div>
+          <mat-icon></mat-icon>
+        </div>
+        <div class="totalType">Current Value</div>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
 
 <mat-menu #appMenu="matMenu">
-    <ng-template matMenuContent>
-      <button mat-menu-item (click)="openTransactionDetails()">Transactions</button>
-      <button mat-menu-item>Chart</button>
-    </ng-template>
+  <ng-template matMenuContent>
+    <button mat-menu-item (click)="openTransactionDetails()">Transactions</button>
+    <button mat-menu-item>Chart</button>
+  </ng-template>
 </mat-menu>

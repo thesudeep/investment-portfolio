@@ -77,7 +77,8 @@ export class FileUploadComponent implements OnInit {
       let row = allRows[i].split(',');
       let item = {
         id: `coin_${row[1]}`,
-        product: row[6], // row[2] shows USD or USDC
+        product: row[2],
+        productName: row[6], 
         type: row[3],
         date: new Date(row[4]),
         quantity: parseFloat(row[5]),
