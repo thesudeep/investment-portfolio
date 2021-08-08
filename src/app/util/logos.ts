@@ -242,6 +242,10 @@ export const logos: any[] =   [
     {
       ticker: "PLA",
       url: "https://dynamic-assets.coinbase.com/5bf74d2b6bc08aed7ce4e8e352e2d3ce9a6492393e8dfd0a002c0a06be28447a82d357c58f19b799439737561eaf5852488bc60c1b0e928dcbfbd2b4880da1be/asset_icons/96d843635f63e8da41d1daadf6338a5a46be0158fbd9fab182d9f43b09bc9ac1.png"
+    },
+    {
+      ticker: "ACH",
+      url: "https://dynamic-assets.coinbase.com/eaffb50de85cd341216489c007bd1b1c70f6946b7a0fc163b20028aa0aba71fb21052273dcfa952b848f75cc795e399a086c38977b80fad92e56c692a9479024/asset_icons/5792632d842b5a46c9fc49950f628f38cad41c40658478381922265507f41a62.png"
     }
 
 
