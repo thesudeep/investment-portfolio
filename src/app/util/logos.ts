@@ -250,6 +250,10 @@ export const logos: any[] =   [
     {
       ticker: "IOTX",
       url: "https://dynamic-assets.coinbase.com/4333f1fe9b6d7c74004f9a1e05e0137c8a7bf9bc4ab4238c456ad13e1fe75a0ecbfc44471863c7d1365efb9d5c732e6be411c81ebeb7534d2047e4ec19bb4dc7/asset_icons/aa7e51ce4629df9e7c9fa38a483c0f1d482254f6328099da0ee5422b6a2df097.png"
+    },
+    {
+      ticker: "TRIBE",
+      url: "https://dynamic-assets.coinbase.com/e92d389970cb7f1aecc11181c974716609f56def102bc81e2fe9f2af6298a1a786adae69a786ab6596661c96580d6a8d66a10e7613e943754aba3c150c74e48e/asset_icons/3570586fb277a3e505de4ecf848bc37d9050cc1ee9798eaefdd48011f5236ad9.png"
     }
 
 
