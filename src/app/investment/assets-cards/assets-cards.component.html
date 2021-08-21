@@ -73,7 +73,7 @@
 
         </div>
       </div>
-      <button mat-icon-button [matMenuTriggerFor]="appMenu">
+      <button mat-icon-button [matMenuTriggerFor]="appMenu" class="align-self-start">
         <mat-icon>more_vert</mat-icon>
       </button>
 
@@ -82,7 +82,7 @@
 
   </mat-card-title>
   <mat-card-content>
-    <div class="d-flex justify-content-between mt-4 pt-3">
+    <div class="d-flex justify-content-between pt-1">
       <div>
         <div class="d-flex align-items-center">
           <div class="totalNumber">{{transaction.remaining | number : '1.2-2'}}</div>
