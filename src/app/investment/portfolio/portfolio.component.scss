@@ -34,3 +34,7 @@
   .lowPrice {
     color: #ff4081;
   }
+
+  ::ng-deep .mat-select-panel {
+    max-height: none !important;
+  }

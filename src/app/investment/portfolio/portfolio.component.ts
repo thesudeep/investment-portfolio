@@ -87,18 +87,18 @@ export class PortfolioComponent implements OnInit {
 
   ngOnInit(): void {
     this.portfolio = {
-      assets:null,
-      totalRealizedGainLoss:0,
-      totalUnrealizedGainLoss:0,
-      totalGainLoss:0,
-      totalCurrentValue:0,
+      assets: null,
+      totalRealizedGainLoss: 0,
+      totalUnrealizedGainLoss: 0,
+      totalGainLoss: 0,
+      totalCurrentValue: 0,
       totalFees: 0
     }
     this.appService.uploadSubject.subscribe(() => {
       this.initializeData();
     })
     this.initializeData();
-    this.timeInterval = interval(10000).pipe().subscribe(()=>{
+    this.timeInterval = interval(10000).pipe().subscribe(() => {
       this.calculateAggregations();
     });
   }
@@ -121,16 +121,16 @@ export class PortfolioComponent implements OnInit {
   onSorted(event: any): void {
     this.selectedSortedValue = event.value;
     const selectedSortedItem = this.sortedOptions.find((item: any) => item.value === this.selectedSortedValue);
-    if(selectedSortedItem) {
+    if (selectedSortedItem) {
       let items: any[] = [];
-      Object.keys(this.portfolio.assets).forEach((item)=>{
+      Object.keys(this.portfolio.assets).forEach((item) => {
         items.push({
           name: item,
           value: this.portfolio.assets[item][selectedSortedItem.name]
         })
       });
-      let sortedTickers = items.sort((a:any, b:any)=>{
-        if(selectedSortedItem.orderIndex > 0) {
+      let sortedTickers = items.sort((a: any, b: any) => {
+        if (selectedSortedItem.orderIndex > 0) {
           return a.value - b.value;
         }
         return b.value - a.value
@@ -150,7 +150,7 @@ export class PortfolioComponent implements OnInit {
     });
   }
 
-  public clearSearchFilter(){
+  public clearSearchFilter() {
     this.searchTerm = '';
   }
 
@@ -163,7 +163,6 @@ export class PortfolioComponent implements OnInit {
       this.portfolio.assets = groupByTicker(transactionData);
       this.calculateAggregations();
     }
-
   }
 
   private calculateAggregations() {
@@ -175,12 +174,12 @@ export class PortfolioComponent implements OnInit {
     let totalFees = 0;
     this.getCurrentPrice(`https://api.pro.coinbase.com/products/stats`).subscribe(productStats => {
       tickers.forEach((ticker: string) => {
-        let transactions = this.portfolio.assets[ticker].sort((a: any, b: any) =>{
-          let d1:any = new Date(a.date);
-          let d2:any = new Date(b.date);
-          return d1-d2;
+        let transactions = this.portfolio.assets[ticker].sort((a: any, b: any) => {
+          let d1: any = new Date(a.date);
+          let d2: any = new Date(b.date);
+          return d1 - d2;
         });
-        
+
         // calculate realized gain/loss
         for (let i = 0; i < transactions.length; i++) {
           if (transactions[i].type === "BUY" && transactions[i].remaining > 0) {
@@ -189,11 +188,11 @@ export class PortfolioComponent implements OnInit {
               if (sellTransactions) {
                 if (sellTransactions.remaining > transactions[i].remaining) {
                   sellTransactions.remaining -= transactions[i].remaining;
-                  transactions[i].realizedGainLoss += this.updateRealizedGainLoss(transactions[i].remaining,transactions[i].unitPrice, transactions[i].unitFees,sellTransactions.unitPrice, sellTransactions.unitFees)
+                  transactions[i].realizedGainLoss += this.updateRealizedGainLoss(transactions[i].remaining, transactions[i].unitPrice, transactions[i].unitFees, sellTransactions.unitPrice, sellTransactions.unitFees)
                   transactions[i].remaining = 0;
                 } else {
                   transactions[i].remaining -= sellTransactions.remaining;
-                  transactions[i].realizedGainLoss += this.updateRealizedGainLoss(sellTransactions.remaining,transactions[i].unitPrice, transactions[i].unitFees,sellTransactions.unitPrice, sellTransactions.unitFees)
+                  transactions[i].realizedGainLoss += this.updateRealizedGainLoss(sellTransactions.remaining, transactions[i].unitPrice, transactions[i].unitFees, sellTransactions.unitPrice, sellTransactions.unitFees)
                   sellTransactions.remaining = 0;
                 }
               } else {
@@ -201,16 +200,16 @@ export class PortfolioComponent implements OnInit {
               }
             }
             // calculate unrealized gain/loss
-            if(transactions[i].remaining>0){
+            if (transactions[i].remaining > 0) {
               let currentPrice = this.getLastPrice(productStats, transactions[i].product);
               let unrealizedGainLossSellPrice = transactions[i].remaining * currentPrice;
-              let unrealizedGainLossPurchasePrice = transactions[i].remaining*transactions[i].unitPrice + transactions[i].unitFees;
+              let unrealizedGainLossPurchasePrice = transactions[i].remaining * transactions[i].unitPrice + transactions[i].unitFees;
               transactions[i].unrealizedGainLoss = unrealizedGainLossSellPrice - unrealizedGainLossPurchasePrice;
               transactions[i].currentValue = unrealizedGainLossSellPrice;
             }
           }
         }
-      
+
         this.portfolio.assets[ticker].totalRealizedGainLoss = this.portfolio.assets[ticker].reduce((a: number, b: any) => +a + +b.realizedGainLoss, 0);
         this.portfolio.assets[ticker].totalUnrealizedGainLoss = this.portfolio.assets[ticker].reduce((a: number, b: any) => +a + +b.unrealizedGainLoss, 0);
         this.portfolio.assets[ticker].totalGainLoss = this.portfolio.assets[ticker].totalRealizedGainLoss + this.portfolio.assets[ticker].totalUnrealizedGainLoss;
@@ -218,9 +217,9 @@ export class PortfolioComponent implements OnInit {
         this.portfolio.assets[ticker].totalCurrentValue = this.portfolio.assets[ticker].reduce((a: number, b: any) => +a + +b.currentValue, 0);
         this.portfolio.assets[ticker].stats = this.getStats(productStats, `${ticker}`);
         this.portfolio.assets[ticker].totalFees = this.portfolio.assets[ticker].reduce((a: number, b: any) => +a + +b.fees, 0);
-        this.portfolio.assets[ticker].change = (this.portfolio.assets[ticker].stats.stats_24hour.last - this.portfolio.assets[ticker].stats.stats_24hour.open)/this.portfolio.assets[ticker].stats.stats_24hour.open * 100;
+        this.portfolio.assets[ticker].change = (this.portfolio.assets[ticker].stats.stats_24hour.last - this.portfolio.assets[ticker].stats.stats_24hour.open) / this.portfolio.assets[ticker].stats.stats_24hour.open * 100;
 
-  
+
         totalRealizedGainLoss += this.portfolio.assets[ticker].totalRealizedGainLoss;
         totalUnrealizedGainLoss += this.portfolio.assets[ticker].totalUnrealizedGainLoss;
         totalGainLoss += this.portfolio.assets[ticker].totalGainLoss;
@@ -232,16 +231,13 @@ export class PortfolioComponent implements OnInit {
         this.portfolio.totalGainLoss = totalGainLoss;
         this.portfolio.totalCurrentValue = totalCurrentValue;
         this.portfolio.totalFees = totalFees;
-
-  
       });
-      this.onSorted({value: this.selectedSortedValue}); //sorted by highest value
-      console.log(this.portfolio)
-      });
+      this.onSorted({ value: this.selectedSortedValue }); //sorted by highest value
+    });
   }
 
   private updateRealizedGainLoss(totalSoldQuantity: number, purchaseUnitPrice: number, purchaseUnitFees: number, salesUnitPrice: number, salesUnitFees: number): number {
-    return (totalSoldQuantity*salesUnitPrice - totalSoldQuantity*salesUnitFees) - (totalSoldQuantity*purchaseUnitPrice + totalSoldQuantity*purchaseUnitFees);
+    return (totalSoldQuantity * salesUnitPrice - totalSoldQuantity * salesUnitFees) - (totalSoldQuantity * purchaseUnitPrice + totalSoldQuantity * purchaseUnitFees);
   }
 
   private getCurrentPrice(url: string): Observable<any> {
@@ -249,7 +245,6 @@ export class PortfolioComponent implements OnInit {
   }
 
   private getLastPrice(productStats: any, ticker: string) {
-    console.log(ticker)
     return productStats[ticker]["stats_24hour"]["last"];
   }
 
