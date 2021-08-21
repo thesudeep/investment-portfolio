@@ -64,6 +64,18 @@ export class PortfolioComponent implements OnInit {
       text: 'Highest Fee',
       name: 'totalFees',
       orderIndex: -1
+    },
+    {
+      value: 9,
+      text: 'Todays Best',
+      name: 'change',
+      orderIndex: -1
+    },
+    {
+      value: 10,
+      text: 'Todays Worst',
+      name: 'change',
+      orderIndex: 1
     }
   ];
 
@@ -206,6 +218,8 @@ export class PortfolioComponent implements OnInit {
         this.portfolio.assets[ticker].totalCurrentValue = this.portfolio.assets[ticker].reduce((a: number, b: any) => +a + +b.currentValue, 0);
         this.portfolio.assets[ticker].stats = this.getStats(productStats, `${ticker}`);
         this.portfolio.assets[ticker].totalFees = this.portfolio.assets[ticker].reduce((a: number, b: any) => +a + +b.fees, 0);
+        this.portfolio.assets[ticker].change = (this.portfolio.assets[ticker].stats.stats_24hour.last - this.portfolio.assets[ticker].stats.stats_24hour.open)/this.portfolio.assets[ticker].stats.stats_24hour.open * 100;
+
   
         totalRealizedGainLoss += this.portfolio.assets[ticker].totalRealizedGainLoss;
         totalUnrealizedGainLoss += this.portfolio.assets[ticker].totalUnrealizedGainLoss;

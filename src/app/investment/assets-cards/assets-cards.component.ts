@@ -14,7 +14,6 @@ export class AssetsCardsComponent {
 
   showDetail: boolean = false; 
   logoUrl: string = '';
-  change: number =0;
 
   @Input() ticker: any;
   @Input() transaction: any;
@@ -26,7 +25,6 @@ export class AssetsCardsComponent {
   }
   ngOnInit(): void {
     this.logoUrl = logos.find((logo: any) => logo.ticker === this.ticker)? logos.find((logo: any) => logo.ticker === this.ticker).url : '';
-    this.change = (this.transaction.stats.stats_24hour.last - this.transaction.stats.stats_24hour.open)/this.transaction.stats.stats_24hour.open * 100;
   }
 
    openTransactionDetails() {
