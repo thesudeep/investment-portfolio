@@ -92,7 +92,10 @@ export class PortfolioComponent implements OnInit {
       totalUnrealizedGainLoss: 0,
       totalGainLoss: 0,
       totalCurrentValue: 0,
-      totalFees: 0
+      totalFees: 0,
+      totalPurchase: 0,
+      totalSales:  0,
+      totalVolume: 0
     }
     this.appService.uploadSubject.subscribe(() => {
       this.initializeData();
@@ -111,6 +114,9 @@ export class PortfolioComponent implements OnInit {
     this.portfolio.totalGainLoss = 0;
     this.portfolio.totalCurrentValue = 0;
     this.portfolio.totalFees = 0;
+    this.portfolio.totalPurchase = 0;
+    this.portfolio.totalSales = 0;
+    this.portfolio.totalVolume = 0;
     this.sortedTickers = [];
   }
 
@@ -141,7 +147,7 @@ export class PortfolioComponent implements OnInit {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(FileUploadComponent, {
-      width: '800px',
+      width: '1450px',
       height: 'auto',
       data: {}
     });
@@ -172,6 +178,9 @@ export class PortfolioComponent implements OnInit {
     let totalGainLoss = 0;
     let totalCurrentValue = 0;
     let totalFees = 0;
+    let totalPurchase = 0;
+    let totalSales = 0;
+    let totalVolume = 0;
     this.getCurrentPrice(`https://api.pro.coinbase.com/products/stats`).subscribe(productStats => {
       tickers.forEach((ticker: string) => {
         let transactions = this.portfolio.assets[ticker].sort((a: any, b: any) => {
@@ -179,6 +188,10 @@ export class PortfolioComponent implements OnInit {
           let d2: any = new Date(b.date);
           return d1 - d2;
         });
+
+        this.portfolio.assets[ticker].totalPurchase = Math.abs(this.portfolio.assets[ticker].filter((item: any) => item.type === "BUY").reduce((a: number, b: any) => +a + +b.price, 0));
+        this.portfolio.assets[ticker].totalSales = Math.abs(this.portfolio.assets[ticker].filter((item: any) => item.type === "SELL").reduce((a: number, b: any) => +a + +b.price, 0));
+        this.portfolio.assets[ticker].totalVolume = this.portfolio.assets[ticker].totalPurchase + this.portfolio.assets[ticker].totalSales;
 
         // calculate realized gain/loss
         for (let i = 0; i < transactions.length; i++) {
@@ -220,19 +233,27 @@ export class PortfolioComponent implements OnInit {
         this.portfolio.assets[ticker].change = (this.portfolio.assets[ticker].stats.stats_24hour.last - this.portfolio.assets[ticker].stats.stats_24hour.open) / this.portfolio.assets[ticker].stats.stats_24hour.open * 100;
 
 
+ 
         totalRealizedGainLoss += this.portfolio.assets[ticker].totalRealizedGainLoss;
         totalUnrealizedGainLoss += this.portfolio.assets[ticker].totalUnrealizedGainLoss;
         totalGainLoss += this.portfolio.assets[ticker].totalGainLoss;
         totalCurrentValue += this.portfolio.assets[ticker].totalCurrentValue;
         totalFees += this.portfolio.assets[ticker].totalFees;
 
-        this.portfolio.totalRealizedGainLoss = totalRealizedGainLoss;
-        this.portfolio.totalUnrealizedGainLoss = totalUnrealizedGainLoss;
-        this.portfolio.totalGainLoss = totalGainLoss;
-        this.portfolio.totalCurrentValue = totalCurrentValue;
-        this.portfolio.totalFees = totalFees;
+        totalPurchase += this.portfolio.assets[ticker].totalPurchase;
+        totalSales += this.portfolio.assets[ticker].totalSales;
+        totalVolume += this.portfolio.assets[ticker].totalVolume;
       });
+      this.portfolio.totalRealizedGainLoss = totalRealizedGainLoss;
+      this.portfolio.totalUnrealizedGainLoss = totalUnrealizedGainLoss;
+      this.portfolio.totalGainLoss = totalGainLoss;
+      this.portfolio.totalCurrentValue = totalCurrentValue;
+      this.portfolio.totalFees = totalFees;
+      this.portfolio.totalPurchase = totalPurchase;
+      this.portfolio.totalSales = totalSales;
+      this.portfolio.totalVolume = totalVolume;
       this.onSorted({ value: this.selectedSortedValue }); //sorted by highest value
+      console.log(this.portfolio)
     });
   }
 
