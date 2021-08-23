@@ -13,6 +13,7 @@ export class FileUploadComponent implements OnInit {
   public coinbaseData: any = [];
   public binanceData: any = [];
   public robinhoodData: any = [];
+  public brokerType: string = '';
 
 
   @HostListener('change', ['$event.target.files']) emitFiles(event: FileList) {
@@ -23,13 +24,14 @@ export class FileUploadComponent implements OnInit {
   constructor(public dialogRef: MatDialogRef<FileUploadComponent>, @Inject(MAT_DIALOG_DATA) public data: any, public appService: AppService) { }
 
   ngOnInit(): void {
-    let localData = '';
     if(this.data.type === 'coinbase') {
-      window.localStorage.getItem('coinbaseData');
+      this.brokerType = 'coinbaseData';
+      let localData = window.localStorage.getItem(this.brokerType);
+      if(localData) {
+        this.coinbaseData = JSON.parse(localData);
+      }
     }
-    if (localData) {
-      this.coinbaseData = JSON.parse(localData);
-    }
+
   }
 
 
@@ -46,9 +48,9 @@ export class FileUploadComponent implements OnInit {
       reader.onload = ((event: any) => {
         let data = this.transformCoinbase(event.target.result);
         if (data.length > 0) {
-          window.localStorage.removeItem('coinbaseData');
+          window.localStorage.removeItem(this.brokerType);
           if (this.coinbaseData.length === 0) {
-            window.localStorage.setItem('coinbaseData', JSON.stringify(data));
+            window.localStorage.setItem(this.brokerType, JSON.stringify(data));
           } else {
             let newData = this.coinbaseData;
             for (let i = 0; i < data.length; i++) {
@@ -56,9 +58,9 @@ export class FileUploadComponent implements OnInit {
                 newData.push(data[i]);
               }
             }
-            window.localStorage.setItem('coinbaseData', JSON.stringify(newData));
+            window.localStorage.setItem(this.brokerType, JSON.stringify(newData));
           }
-          let localData = window.localStorage.getItem('coinbaseData');
+          let localData = window.localStorage.getItem(this.brokerType);
           if (localData) {
             this.coinbaseData = JSON.parse(localData);
           }
@@ -118,5 +120,6 @@ export class FileUploadComponent implements OnInit {
     }
     return data;
   }
+  
 
 }
