@@ -9,64 +9,82 @@ import { AppService } from '../../app.service';
 })
 export class FileUploadComponent implements OnInit {
   @Input() progress: any;
-  public file: any = null;
-  public transactionsData: any = [];
+  public files: any = [];
+  public coinbaseData: any = [];
+  public binanceData: any = [];
+  public robinhoodData: any = [];
+
 
   @HostListener('change', ['$event.target.files']) emitFiles(event: FileList) {
     const file = event && event.item(0);
-    this.file = file;
+    this.files.push(file);
   }
 
-  constructor(public dialogRef: MatDialogRef<FileUploadComponent>, public appService: AppService) { }
+  constructor(public dialogRef: MatDialogRef<FileUploadComponent>, @Inject(MAT_DIALOG_DATA) public data: any, public appService: AppService) { }
 
   ngOnInit(): void {
-    let localData = window.localStorage.getItem('transactionsData');
+    let localData = '';
+    if(this.data.type === 'coinbase') {
+      window.localStorage.getItem('coinbaseData');
+    }
     if (localData) {
-      this.transactionsData = JSON.parse(localData);
+      this.coinbaseData = JSON.parse(localData);
     }
   }
 
 
   close(): void {
     this.dialogRef.close();
-    this.file = null;
+    this.files = [];
   }
 
   process(): void {
-
-    var reader = new FileReader();
-    reader.readAsText(this.file);
-
-    reader.onload = ((event: any) => {
-      let data = this.transformCoinbase(event.target.result);
-      if (data.length > 0) {
-        window.localStorage.removeItem('transactionsData');
-        if (this.transactionsData.length === 0) {
-          window.localStorage.setItem('transactionsData', JSON.stringify(data));
-        } else {
-          let newData = this.transactionsData;
-          for (let i = 0; i < data.length; i++) {
-            if (!this.transactionsData.map((item: any) => item.id).includes(data[i].id)) {
-              newData.push(data[i]);
-            }
-          }
-          window.localStorage.setItem('transactionsData', JSON.stringify(newData));
-        }
-        let localData = window.localStorage.getItem('transactionsData');
-        if (localData) {
-          this.transactionsData = JSON.parse(localData);
-        }
-      }
-      this.dialogRef.close();
-      this.file = null;
-      this.appService.trigger();
+    for(const [i, file] of this.files.entries()) {
+      var reader = new FileReader();
+      reader.readAsText(file);
   
-    });
+      reader.onload = ((event: any) => {
+        let data = this.transformCoinbase(event.target.result);
+        if (data.length > 0) {
+          window.localStorage.removeItem('coinbaseData');
+          if (this.coinbaseData.length === 0) {
+            window.localStorage.setItem('coinbaseData', JSON.stringify(data));
+          } else {
+            let newData = this.coinbaseData;
+            for (let i = 0; i < data.length; i++) {
+              if (!this.coinbaseData.map((item: any) => item.id).includes(data[i].id)) {
+                newData.push(data[i]);
+              }
+            }
+            window.localStorage.setItem('coinbaseData', JSON.stringify(newData));
+          }
+          let localData = window.localStorage.getItem('coinbaseData');
+          if (localData) {
+            this.coinbaseData = JSON.parse(localData);
+          }
 
-    reader.onerror = ((err) => {
-      console.log(err)
-      // clear file
-    })
+          if(i=== this.files.length-1) {
+            this.dialogRef.close();
+            this.files = [];
+            this.appService.trigger();
+          }
+        }
+      });
+  
+      reader.onerror = ((err) => {
+        console.log(err)
+        // clear file
+      });
+    }
+
+
+  }
+
+  removeFile(file: any) {
+    let index = this.files.findIndex((item:any) => item === file);
+    if(index !== -1) {
+      this.files.splice(index, 1);
+    }
 
   }
 

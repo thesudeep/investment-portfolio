@@ -13,7 +13,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import { PortfolioComponent } from './portfolio/portfolio.component';
+import { CoinbaseComponent } from './coinbase/coinbase.component';
 import { AssetsCardsComponent } from './assets-cards/assets-cards.component';
 import { SearchFilterPipe } from './search-filter.pipe';
 import { FileUploadComponent } from './file-upload/file-upload.component';
@@ -22,7 +22,7 @@ import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
-    PortfolioComponent,
+    CoinbaseComponent,
     AssetsCardsComponent,
     SearchFilterPipe,
     FileUploadComponent,

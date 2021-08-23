@@ -1,24 +1,30 @@
-
-<div class="d-flex justify-content-end">
-        <button mat-icon-button class="close-button" [mat-dialog-close]="true">
-                <mat-icon class="close-icon">close</mat-icon>
-        </button>
+<div class="d-flex justify-content-between">
+    <h2>Upload File for {{data.type | titlecase}}</h2>
+    <button mat-icon-button class="close-button" [mat-dialog-close]="true">
+        <mat-icon class="close-icon">close</mat-icon>
+    </button>
 </div>
 <div class="file-drop-area">
-        <span class="fake-btn">Choose file</span>
-        <span class="file-msg">{{file ? file.name : 'or drag and drop file here' }}</span>
-        <input class="file-input" type="file">
+    <span class="fake-btn">Choose file</span>
+    <span class="file-msg">Drag and drop multiple files here</span>
+    <input class="file-input" type="file">
 </div>
-<div class="d-flex justify-content-center pt-4">
-    <mat-radio-group aria-label="Select Exchange for File upload">
-        <mat-radio-button value="coinbase" [checked]="true" disabled>Coinbase</mat-radio-button>
-        <mat-radio-button value="robinhood" disabled>Robinhood</mat-radio-button>
-        <mat-radio-button value="binanceus" disabled>Binance US</mat-radio-button>
-    </mat-radio-group>
+<div class="container file-list">
+    <div class="row align-items-center" *ngFor="let file of files">
+            <div class="col">
+                {{file.name}}
+            </div>
+            <div class="col" *ngIf="file">
+            <button mat-icon-button color="warn" (click)="removeFile(file)">
+                    <mat-icon>delete</mat-icon>
+            </button>
+            </div>
+        </div>
+</div>
 
-</div>
+
 <!-- <app-progress [progress]="progress"></app-progress> -->
 <div mat-dialog-actions class="d-flex justify-content-center">
     <button mat-raised-button (click)="close()">Cancel</button>
-    <button mat-raised-button (click)="process()" [disabled]="!file">Process</button>
+    <button mat-raised-button (click)="process()" [disabled]="files.length===0">Process</button>
 </div>

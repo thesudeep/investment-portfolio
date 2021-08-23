@@ -7,11 +7,11 @@ import { Observable, Subscription, interval } from 'rxjs';
 import { FileUploadComponent } from '../file-upload/file-upload.component';
 
 @Component({
-  selector: 'app-portfolio',
-  templateUrl: './portfolio.component.html',
-  styleUrls: ['./portfolio.component.scss']
+  selector: 'app-coinbase',
+  templateUrl: './coinbase.component.html',
+  styleUrls: ['./coinbase.component.scss']
 })
-export class PortfolioComponent implements OnInit {
+export class CoinbaseComponent implements OnInit {
 
   public portfolio: any;
   public sortedTickers: any = [];
@@ -107,7 +107,7 @@ export class PortfolioComponent implements OnInit {
   }
 
   clear(): void {
-    localStorage.removeItem('transactionsData');
+    localStorage.removeItem('coinbaseData');
     this.portfolio.assets = [];
     this.portfolio.totalRealizedGainLoss = 0;
     this.portfolio.totalUnrealizedGainLoss = 0;
@@ -147,9 +147,9 @@ export class PortfolioComponent implements OnInit {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(FileUploadComponent, {
-      width: '1450px',
+      width: '600px',
       height: 'auto',
-      data: {}
+      data: { type: "coinbase" }
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -162,7 +162,7 @@ export class PortfolioComponent implements OnInit {
 
 
   private initializeData() {
-    let localData = window.localStorage.getItem('transactionsData');
+    let localData = window.localStorage.getItem('coinbaseData');
     if (localData) {
       let transactionData = JSON.parse(localData);
       const groupByTicker = groupBy("productName");
