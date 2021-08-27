@@ -1,0 +1,106 @@
+<mat-card>
+  <div class="row">
+    <div class="col-9 mt-2">
+      <div class="d-flex justify-content-between" *ngIf="portfolio.totalPurchase > 0">
+        <div>
+          <div class="d-flex align-items-center">
+            <div class="totalNumber">${{portfolio.totalFees | shortNumber}}</div>
+            <mat-icon></mat-icon>
+          </div>
+          <div class="totalType">Total Fees</div>
+        </div>
+        <div>
+          <div class="d-flex align-items-center">
+            <div class="totalNumber">${{portfolio.totalPurchase  | shortNumber }}</div>
+            <mat-icon></mat-icon>
+          </div>
+          <div class="totalType">Total Purchase</div>
+        </div>
+
+        <div>
+          <div class="d-flex align-items-center">
+            <div class="totalNumber">${{portfolio.totalSales  | shortNumber }}</div>
+            <mat-icon></mat-icon>
+          </div>
+          <div class="totalType">Total Sales</div>
+        </div>
+
+        <div>
+          <div class="d-flex align-items-center">
+            <div class="totalNumber">${{portfolio.totalVolume  | shortNumber }}</div>
+            <mat-icon></mat-icon>
+          </div>
+          <div class="totalType">Total Volume</div>
+        </div>
+        <div>
+          <div class="d-flex align-items-center">
+            <div class="totalNumber" [ngClass]="portfolio.totalRealizedGainLoss > 0  ? 'highPrice' : 'lowPrice'">
+              {{portfolio.totalRealizedGainLoss | currency: 'USD'}}</div>
+            <mat-icon *ngIf="portfolio.totalRealizedGainLoss > 0" class="positiveIcon">arrow_upward</mat-icon>
+            <mat-icon *ngIf="portfolio.totalRealizedGainLoss < 0" class="negativeIcon">arrow_downward</mat-icon>
+          </div>
+          <div class="totalType">Realized Gain/Loss</div>
+        </div>
+        <div>
+          <div class="d-flex align-items-center">
+            <div class="totalNumber" [ngClass]="portfolio.totalUnrealizedGainLoss > 0  ? 'highPrice' : 'lowPrice'">
+              {{portfolio.totalUnrealizedGainLoss | currency: 'USD'}}</div>
+            <mat-icon *ngIf="portfolio.totalUnrealizedGainLoss > 0" class="positiveIcon">arrow_upward</mat-icon>
+            <mat-icon *ngIf="portfolio.totalUnrealizedGainLoss < 0" class="negativeIcon">arrow_downward</mat-icon>
+
+          </div>
+          <div class="totalType">Unrealized Gain/Loss</div>
+        </div>
+        <div>
+          <div class="d-flex align-items-center">
+            <div class="totalNumber" [ngClass]="portfolio.totalGainLoss > 0  ? 'highPrice' : 'lowPrice'">
+              {{portfolio.totalGainLoss | currency: 'USD'}}</div>
+            <mat-icon *ngIf="portfolio.totalGainLoss > 0" class="positiveIcon">arrow_upward</mat-icon>
+            <mat-icon *ngIf="portfolio.totalGainLoss < 0" class="negativeIcon">arrow_downward</mat-icon>
+
+          </div>
+          <div class="totalType">Current Gain/Loss</div>
+        </div>
+        <div>
+          <div class="d-flex align-items-center">
+            <div class="totalNumber">{{portfolio.totalCurrentValue | currency: 'USD'}}</div>
+            <mat-icon></mat-icon>
+          </div>
+          <div class="totalType">Current Value</div>
+        </div>
+      </div>
+
+    </div>
+    <div class="col-3 d-flex justify-content-between">
+      <mat-form-field class="input-field" appearance="fill">
+        <mat-label>Filter By Coin</mat-label>
+        <input matInput type="text" [value]="searchTerm" (input)="search($event)">
+        <button matSuffix mat-icon-button aria-label="Clear" (click)="clearSearchFilter()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+      <mat-form-field class="input-field" appearance="fill">
+        <mat-label>Order By</mat-label>
+        <mat-select (selectionChange)="sorted($event)">
+          <mat-option *ngFor="let option of sortedOptions" [value]="option.value">
+            {{option.text}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <button class="mr-8" mat-icon-button [matMenuTriggerFor]="menu" aria-label="File Upload">
+        <mat-icon>menu</mat-icon>
+      </button>
+    </div>
+
+  </div>
+</mat-card>
+<mat-menu #menu="matMenu">
+  <button mat-menu-item (click)="openDialog()">
+    <mat-icon>file_upload</mat-icon>
+    <span>File Upload</span>
+  </button>
+  <button mat-menu-item (click)="deleteData()">
+    <mat-icon>delete</mat-icon>
+    <span>Clear</span>
+  </button>
+</mat-menu>

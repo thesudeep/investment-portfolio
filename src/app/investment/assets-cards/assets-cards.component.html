@@ -4,20 +4,23 @@
       <div class="d-flex align-items-center">
         <img class='logo' [src]="logoUrl" />
         <div class="productName">{{ticker}}
-            <div class="d-flex align-items-center" [ngClass]="transaction.change > 0  ? 'highPrice' : 'lowPrice'">
+            <div *ngIf="transaction.stats.change" class="d-flex align-items-center" [ngClass]="transaction.change > 0  ? 'highPrice' : 'lowPrice'">
                 <div class="change-text">{{transaction.change | number : '1.2-2'}}%</div>
                 <mat-icon *ngIf="transaction.change > 0" class="change-icon positiveIcon">arrow_upward</mat-icon>
                 <mat-icon *ngIf="transaction.change < 0" class="change-icon negativeIcon">arrow_downward</mat-icon>
-              </div>
+            </div>
+            <div *ngIf="!transaction.stats.change" class="d-flex align-items-center">
+                <div class="change-text">{{transaction.stats.current | currency: 'USD': 'symbol': '1.2-4'}}</div>
+            </div>
         </div>
       </div>
 
-      <div class="d-flex align-items-center product-stats">
+      <div class="d-flex align-items-center product-stats" *ngIf="transaction.stats.volume">
         <div>
           <div
-            [ngClass]="transaction.stats.stats_24hour.last > transaction.stats.stats_24hour.open  ? 'highPrice' : 'lowPrice'"
+            [ngClass]="transaction.stats.current > transaction.stats.open  ? 'highPrice' : 'lowPrice'"
             class="price">
-            {{transaction.stats.stats_24hour.last | currency: 'USD': 'symbol': '1.2-4'}}
+            {{transaction.stats.current | currency: 'USD': 'symbol': '1.2-4'}}
           </div>
           <div>
             Current
@@ -27,9 +30,9 @@
 
         <div>
           <div
-            [ngClass]="transaction.stats.stats_24hour.last > transaction.stats.stats_24hour.open  ? 'highPrice' : 'lowPrice'"
+            [ngClass]="transaction.stats.current > transaction.stats.open  ? 'highPrice' : 'lowPrice'"
             class="price">
-            {{transaction.stats.stats_24hour.open | currency: 'USD': 'symbol': '1.2-4'}}
+            {{transaction.stats.open | currency: 'USD': 'symbol': '1.2-4'}}
           </div>
           <div>
             Open
@@ -39,9 +42,9 @@
 
         <div>
           <div
-            [ngClass]="transaction.stats.stats_24hour.last > transaction.stats.stats_24hour.open  ? 'highPrice' : 'lowPrice'"
+            [ngClass]="transaction.stats.current > transaction.stats.open  ? 'highPrice' : 'lowPrice'"
             class="price">
-            {{transaction.stats.stats_24hour.low | currency: 'USD': 'symbol': '1.2-4'}}
+            {{transaction.stats.low | currency: 'USD': 'symbol': '1.2-4'}}
           </div>
           <div>
             Low
@@ -51,9 +54,9 @@
 
         <div>
           <div
-            [ngClass]="transaction.stats.stats_24hour.last > transaction.stats.stats_24hour.open  ? 'highPrice' : 'lowPrice'"
+            [ngClass]="transaction.stats.current > transaction.stats.open  ? 'highPrice' : 'lowPrice'"
             class="price">
-            {{transaction.stats.stats_24hour.high | currency: 'USD': 'symbol': '1.2-4'}}
+            {{transaction.stats.high | currency: 'USD': 'symbol': '1.2-4'}}
           </div>
           <div>
             High
@@ -63,9 +66,9 @@
 
         <div>
           <div
-            [ngClass]="transaction.stats.stats_24hour.last > transaction.stats.stats_24hour.open  ? 'highPrice' : 'lowPrice'"
+            [ngClass]="transaction.stats.current > transaction.stats.open  ? 'highPrice' : 'lowPrice'"
             class="price">
-            {{transaction.stats.stats_24hour.volume | shortNumber}}
+            {{transaction.stats.volume | shortNumber}}
           </div>
           <div>
             Volume

@@ -1,5 +1,6 @@
 import { Component, OnInit, Inject, Input, HostListener, ElementRef, Output, EventEmitter, ɵLocaleDataIndex } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import * as XLSX from 'xlsx';
 import { AppService } from '../../app.service';
 
 @Component({
@@ -30,7 +31,13 @@ export class FileUploadComponent implements OnInit {
       if(localData) {
         this.coinbaseData = JSON.parse(localData);
       }
-    }
+    } else if(this.data.type === 'binance') {
+      this.brokerType = 'binanceData';
+      let localData = window.localStorage.getItem(this.brokerType);
+      if(localData) {
+        this.binanceData = JSON.parse(localData);
+      }
+    } 
 
   }
 
@@ -41,6 +48,23 @@ export class FileUploadComponent implements OnInit {
   }
 
   process(): void {
+    if(this.brokerType === 'coinbaseData') {
+      this.processCoinbase();
+    } else if(this.brokerType === 'binanceData') {
+      this.processBinance();
+    }
+  }
+
+  removeFile(file: any) {
+    let index = this.files.findIndex((item:any) => item === file);
+    if(index !== -1) {
+      this.files.splice(index, 1);
+    }
+
+  }
+
+  private processCoinbase() {
+    window.localStorage.removeItem(this.brokerType);
     for(const [i, file] of this.files.entries()) {
       var reader = new FileReader();
       reader.readAsText(file);
@@ -48,7 +72,6 @@ export class FileUploadComponent implements OnInit {
       reader.onload = ((event: any) => {
         let data = this.transformCoinbase(event.target.result);
         if (data.length > 0) {
-          window.localStorage.removeItem(this.brokerType);
           if (this.coinbaseData.length === 0) {
             window.localStorage.setItem(this.brokerType, JSON.stringify(data));
           } else {
@@ -78,16 +101,46 @@ export class FileUploadComponent implements OnInit {
         // clear file
       });
     }
-
-
   }
 
-  removeFile(file: any) {
-    let index = this.files.findIndex((item:any) => item === file);
-    if(index !== -1) {
-      this.files.splice(index, 1);
-    }
+  private processBinance() {
+    window.localStorage.removeItem(this.brokerType);
+    for(const [i, file] of this.files.entries()) {
+      var reader = new FileReader();
+      reader.readAsText(file);
 
+      reader.onload = ((event: any) => {
+        let data = this.transformBinance(event.target.result);
+        if (data.length > 0) {
+          if (this.binanceData.length === 0) {
+            window.localStorage.setItem(this.brokerType, JSON.stringify(data));
+          } else {
+            let newData = this.binanceData;
+            for (let i = 0; i < data.length; i++) {
+              if (!this.binanceData.map((item: any) => item.id).includes(data[i].id)) {
+                newData.push(data[i]);
+              }
+            }
+            window.localStorage.setItem(this.brokerType, JSON.stringify(newData));
+          }
+          let localData = window.localStorage.getItem(this.brokerType);
+          if (localData) {
+            this.binanceData = JSON.parse(localData);
+          }
+
+          if(i=== this.files.length-1) {
+            this.dialogRef.close();
+            this.files = [];
+            this.appService.trigger();
+          }
+        }
+      });
+  
+      reader.onerror = ((err) => {
+        console.log(err)
+        // clear file
+      });
+    }
   }
 
   private transformCoinbase(contents: string) {
@@ -107,6 +160,48 @@ export class FileUploadComponent implements OnInit {
         fees: parseFloat(row[8]),
         unitFees: parseFloat(row[8])/parseFloat(row[5]),
         remaining: parseFloat(row[5]),
+        realizedGainLoss: 0,
+        unrealizedGainLoss: 0,
+        currentValue:0
+
+      }
+      // if(item.product === "FIL") {
+      //   data.push(item);
+      // }
+      data.push(item);
+
+    }
+    return data;
+  }
+
+  private transformBinance(contents: string) {
+    const allRows = contents.trim().split(/\r\n|\n/);
+    let data = [];
+    for (let i = 1; i < allRows.length; i++) {
+      let row = allRows[i].split(',');
+      let id = `binance_${i}`;
+      let product = row[1].replace('USDT', 'USD');;
+      let productName = product.replace('USDT', '').replace('USD', '');
+      let type = row[2];
+      let date = new Date(row[0]);
+      let quantity = parseFloat(row[4]);
+      let price = parseFloat(row[5]);
+      let unitPrice = parseFloat(row[3]);
+      let fees = parseFloat(row[6]) * unitPrice;
+      let unitFees = fees/unitPrice;
+
+      let item = {
+        id: id,
+        product: product,
+        productName: productName, 
+        type: type,
+        date: date,
+        quantity: quantity,
+        price: price,
+        unitPrice: unitPrice,
+        fees: fees, //
+        unitFees: unitFees,
+        remaining: quantity,
         realizedGainLoss: 0,
         unrealizedGainLoss: 0,
         currentValue:0

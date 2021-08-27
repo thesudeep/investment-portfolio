@@ -254,7 +254,50 @@ export const logos: any[] =   [
     {
       ticker: "TRIBE",
       url: "https://dynamic-assets.coinbase.com/e92d389970cb7f1aecc11181c974716609f56def102bc81e2fe9f2af6298a1a786adae69a786ab6596661c96580d6a8d66a10e7613e943754aba3c150c74e48e/asset_icons/3570586fb277a3e505de4ecf848bc37d9050cc1ee9798eaefdd48011f5236ad9.png"
+    },
+
+
+    {
+      ticker: "ONE",
+      url: "https://dynamic-assets.coinbase.com/a5374e6fa4d5fd4478f9aa0b1e19d382169065aa77436938be73107f60c154619e4535126f4497db58d920258cd2fdc0c4b473c1aaa9bd2235feb4050e75e102/asset_icons/e9bf89a0de2f6d4cb6bb0c466635d5b04859c169b60adc527c9d75bb98dc78f5.png",
+    },
+    {
+      ticker: "HBAR",
+      url: "https://dynamic-assets.coinbase.com/ae4087fcfeef11ad77d8875405ba933b9d623bcc8c483f280d3a15f2782de980349076c4f7b4616cc350c3727010d736448194829c4409e2824f710ee8f9832d/asset_icons/32d85085a6a6193b483ea8a9a23d4bf1384269d44c724a0349f0e0bd757f7427.png"
+    },
+    {
+      ticker: "VET",
+      url: "https://dynamic-assets.coinbase.com/0ad9feddd1edfda57c5ee772f241bf8a1b5c78c8d90da7acf5281718d67e121f9d8934e6a796cfc9d7693da2e188926b40bba5a25f9802fb2350bb5af2ff2c2c/asset_icons/2163bda6b530aca9b138244a21abf50f87626beb0605fc5fd492d0dc0eb04143.png"
+    },
+    {
+      ticker: "VTHO",
+      url: "https://dynamic-assets.coinbase.com/a18f7089a951ecd4987583b586df7f613b3591416de8fa606db0175f9a8b42b4a086c13feba8bb4a4fb0a295f1b436494e81d4debc5858355319c714b56080c7/asset_icons/175f4cedb42e0ada31df47a1e10fd47feabd2c8958da9b1eca1decb3869ef084.png"
+    },
+    {
+      ticker: "RVN",
+      url: "https://dynamic-assets.coinbase.com/93bafd5d67afb8d58e6e6968b74049584ab0857d625b9d091f960db29e1247474784ae53dceeb38a9669740c18bda72cc75477a8f8ae132ae8cc8a248c723c49/asset_icons/ac90fecf71b415ba39b8fc4c6cfa0e5b1ed3a6b4db9f127bf3c9aa2c7dffce6f.png"
+    },
+    {
+      ticker: "USD",
+      url: "https://dynamic-assets.coinbase.com/3c15df5e2ac7d4abbe9499ed9335041f00c620f28e8de2f93474a9f432058742cdf4674bd43f309e69778a26969372310135be97eb183d91c492154176d455b8/asset_icons/9d67b728b6c8f457717154b3a35f9ddc702eae7e76c4684ee39302c4d7fd0bb8.png"
+    },
+    {
+      ticker: "ZIL",
+      url: "https://dynamic-assets.coinbase.com/4d3ae0c6aa6d9f113f388c0126d7e789ac23eb7375b7e48bc572d19d3392bdaaa774eaa32be14ce801e14088dc45daa0b8276ae8fd2e398b450a68277b33f393/asset_icons/1597d628dd19b7885433a2ac2d7de6ad196c519aeab4bfe679706aacbf1df78a.png"
+    },
+    {
+      ticker: "WAVES",
+      url: "https://dynamic-assets.coinbase.com/0e47d3ab6e601aae0d75c4d44613681f5bbe88022a4deb0787aa4af8875b731140ebaa6c0853dabf5596bc80450c23ccb06f1feecaa809c26224809ecbf6e396/asset_icons/1f8489bb280fb0a0fd643c1161312ba49655040e9aaaced5f9ad3eeaf868eadc.png"
+    },
+    {
+      ticker: "QTUM",
+      url: "https://dynamic-assets.coinbase.com/8dab9415f8c7e382dabf2192970ccf91857f493f8b105de14f6f24f4f2d737cc45079747314ff69dcec71fc3966748cd0d81e81c731e701c27cf30ae37f30128/asset_icons/1597d628dd19b7885433a2ac2d7de6ad196c519aeab4bfe679706aacbf1df78a.png"
+    },
+    {
+      ticker: "ICX",
+      url: "https://dynamic-assets.coinbase.com/598a40672dfc7459adfe8df195be330310f3776f0fe3a30930e0f2d237cd403bdd40db1544c949ef01ae8553aa5549d64b7e44d038223f2650999a3bf5a1dd4b/asset_icons/3af4b33bde3012fd29dd1366b0ad737660f24acc91750ee30a034a0679256d0b.png"
     }
+
 
 
   ];
