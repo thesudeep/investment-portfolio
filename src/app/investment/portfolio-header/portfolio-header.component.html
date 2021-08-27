@@ -4,7 +4,9 @@
       <div class="d-flex justify-content-between" *ngIf="portfolio.totalPurchase > 0">
         <div>
           <div class="d-flex align-items-center">
-            <div class="totalNumber">${{portfolio.totalFees | shortNumber}}</div>
+            <div class="totalNumber" *ngIf="portfolio.totalFees<100">{{portfolio.totalFees | currency: 'USD'}}</div>
+            <div class="totalNumber" *ngIf="portfolio.totalFees>=100">${{portfolio.totalFees | shortNumber}}</div>
+
             <mat-icon></mat-icon>
           </div>
           <div class="totalType">Total Fees</div>

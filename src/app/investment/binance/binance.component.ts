@@ -40,7 +40,7 @@ export class BinanceComponent implements OnInit {
       this.initializeData();
     })
     this.initializeData();
-    this.timeInterval = interval(10000).pipe().subscribe(() => {
+    this.timeInterval = interval(500).pipe().subscribe(() => {
       this.calculateAggregations();
     });
   }
