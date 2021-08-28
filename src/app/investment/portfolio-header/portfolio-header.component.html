@@ -84,7 +84,7 @@
       <mat-form-field class="input-field" appearance="fill">
         <mat-label>Order By</mat-label>
         <mat-select (selectionChange)="sorted($event)">
-          <mat-option *ngFor="let option of sortedOptions" [value]="option.value">
+          <mat-option *ngFor="let option of sortedOptions" [value]="option">
             {{option.text}}
           </mat-option>
         </mat-select>

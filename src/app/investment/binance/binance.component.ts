@@ -5,6 +5,7 @@ import { AppService } from '../../app.service';
 import { HttpClient } from '@angular/common/http';
 import { Observable, Subscription, interval } from 'rxjs';
 import { FileUploadComponent } from '../file-upload/file-upload.component';
+import { defaultSelectedOption } from '../portfolio-header/sortedOptions';
 
 @Component({
   selector: 'app-binance',
@@ -18,13 +19,14 @@ export class BinanceComponent implements OnInit {
   public searchTerm: string = '';
 
 
-  public selectedSortedValue = 7;
+  public selectedSortedItem: any;
 
   public timeInterval: Subscription;
 
   constructor(private http: HttpClient, public dialog: MatDialog, public appService: AppService) { }
 
   ngOnInit(): void {
+    this.selectedSortedItem = defaultSelectedOption;
     this.portfolio = {
       assets: [],
       totalRealizedGainLoss: 0,
@@ -67,23 +69,24 @@ export class BinanceComponent implements OnInit {
     this.searchTerm = filterText;
   }
 
-  sorted(selectedSortedItem: any): void {
+  sorted(selectedSortedItem?: any): void {
     if (selectedSortedItem) {
-      let items: any[] = [];
-      Object.keys(this.portfolio.assets).forEach((item) => {
-        items.push({
-          name: item,
-          value: this.portfolio.assets[item][selectedSortedItem.name]
-        })
-      });
-      let sortedTickers = items.sort((a: any, b: any) => {
-        if (selectedSortedItem.orderIndex > 0) {
-          return a.value - b.value;
-        }
-        return b.value - a.value
-      })
-      this.sortedTickers = sortedTickers.map((item: any) => item.name);
+      this.selectedSortedItem = selectedSortedItem;
     }
+    let items: any[] = [];
+    Object.keys(this.portfolio.assets).forEach((item) => {
+      items.push({
+        name: item,
+        value: this.portfolio.assets[item][this.selectedSortedItem.name]
+      })
+    });
+    let sortedTickers = items.sort((a: any, b: any) => {
+      if (this.selectedSortedItem.orderIndex > 0) {
+        return a.value - b.value;
+      }
+      return b.value - a.value
+    })
+    this.sortedTickers = sortedTickers.map((item: any) => item.name);
   }
 
   private initializeData() {
@@ -196,12 +199,7 @@ export class BinanceComponent implements OnInit {
       this.portfolio.totalPurchase = totalPurchase;
       this.portfolio.totalSales = totalSales;
       this.portfolio.totalVolume = totalVolume;
-      this.sorted({
-        value: 7,
-        text: 'Highest Current Value',
-        name: 'totalCurrentValue',
-        orderIndex: -1
-      })
+      this.sorted();
       console.log(this.portfolio);
     });
   }

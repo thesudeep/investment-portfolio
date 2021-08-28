@@ -5,6 +5,7 @@ import { AppService } from '../../app.service';
 import { HttpClient } from '@angular/common/http';
 import { Observable, Subscription, interval } from 'rxjs';
 import { FileUploadComponent } from '../file-upload/file-upload.component';
+import { sortedOptions } from './sortedOptions';
 
 @Component({
   selector: 'app-portfolio-header',
@@ -20,73 +21,11 @@ export class PortfolioHeaderComponent {
   @Output() public onSorted = new EventEmitter<any>();
 
   public searchTerm: string = '';
-  public sortedOptions = [
-    {
-      value: 1,
-      text: 'Highest Realized Gain',
-      name: 'totalRealizedGainLoss',
-      orderIndex: -1
-    },
-    {
-      value: 2,
-      text: 'Highest Realized Loss',
-      name: 'totalRealizedGainLoss',
-      orderIndex: 1
-    },
-    {
-      value: 3,
-      text: 'Highest Unrealized Gain',
-      name: 'totalUnrealizedGainLoss',
-      orderIndex: -1
-    },
-    {
-      value: 4,
-      text: 'Highest Unrealized Loss',
-      name: 'totalUnrealizedGainLoss',
-      orderIndex: 1
-    },
-    {
-      value: 5,
-      text: 'Highest Current Gain',
-      name: 'totalGainLoss',
-      orderIndex: -1
-    },
-    {
-      value: 6,
-      text: 'Highest Current Loss',
-      name: 'totalGainLoss',
-      orderIndex: 1
-    },
-    {
-      value: 7,
-      text: 'Highest Current Value',
-      name: 'totalCurrentValue',
-      orderIndex: -1
-    },
-    {
-      value: 8,
-      text: 'Highest Fee',
-      name: 'totalFees',
-      orderIndex: -1
-    },
-    {
-      value: 9,
-      text: 'Todays Best',
-      name: 'change',
-      orderIndex: -1
-    },
-    {
-      value: 10,
-      text: 'Todays Worst',
-      name: 'change',
-      orderIndex: 1
-    }
-  ];
+  public sortedOptions: any;
 
-  public selectedSortedValue = 7;
-
-
-  constructor(public dialog: MatDialog) { }
+  constructor(public dialog: MatDialog) { 
+    this.sortedOptions = sortedOptions;
+  }
 
   deleteData(): void {
     this.onDelete.emit();
@@ -97,12 +36,11 @@ export class PortfolioHeaderComponent {
     this.onFilter.emit(this.searchTerm);
   }
 
-  sorted(event: any): void {
-    this.selectedSortedValue = event.value;
-    const selectedSortedItem = this.sortedOptions.find((item: any) => item.value === this.selectedSortedValue);
+  sorted(item: any): void {
+    const selectedSortedItem = this.sortedOptions.find((option: any) => option.value === item.value.value);
     if (selectedSortedItem) {
       this.onSorted.emit(selectedSortedItem);
-    }
+    } 
   }
 
   openDialog(): void {
