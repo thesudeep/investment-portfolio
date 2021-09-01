@@ -16,6 +16,7 @@ export class CoinbaseComponent implements OnInit {
   public portfolio: any;
   public sortedTickers: any = [];
   public searchTerm: string = '';
+  public showCurrentAssets = true;
 
 
   public selectedSortedItem: any;
@@ -39,6 +40,10 @@ export class CoinbaseComponent implements OnInit {
     }
     this.appService.uploadSubject.subscribe(() => {
       this.initializeData();
+    });
+    this.appService.toggleShowCurrentAssetsSubject.subscribe((response) => {
+      this.showCurrentAssets = response;
+      this.sorted();
     })
     this.initializeData();
     this.timeInterval = interval(500).pipe().subscribe(() => {
@@ -86,6 +91,11 @@ export class CoinbaseComponent implements OnInit {
       return b.value - a.value
     })
     this.sortedTickers = sortedTickers.map((item: any) => item.name);
+    if(this.showCurrentAssets) {
+      this.sortedTickers = sortedTickers.map((item: any) => item.name).filter((ticker: any) => Number(this.portfolio.assets[ticker].totalCurrentValue.toFixed()) > 0);
+    } else {
+      this.sortedTickers = sortedTickers.map((item: any) => item.name);
+    }
   }
 
   private initializeData() {

@@ -6,9 +6,14 @@ import { Subject } from 'rxjs';
 export class AppService {
 
   public uploadSubject = new Subject<string>();
+  public toggleShowCurrentAssetsSubject = new Subject<boolean>();
 
   trigger() {
     this.uploadSubject.next();
+  }
+
+  toggleShowCurrentAssets(value: boolean) {
+    this.toggleShowCurrentAssetsSubject.next(value);
   }
 
 }

@@ -32,8 +32,10 @@ export class PortfolioHeaderComponent {
   }
 
   search(event: any): void {
-    this.searchTerm = event.target.value;
-    this.onFilter.emit(this.searchTerm);
+      this.searchTerm = event.target.value.trim();
+      if(this.searchTerm.length>0){
+        this.onFilter.emit(this.searchTerm);
+    }
   }
 
   sorted(item: any): void {

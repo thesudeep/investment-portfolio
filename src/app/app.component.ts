@@ -1,6 +1,7 @@
 import { Component, HostBinding } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { OverlayContainer } from '@angular/cdk/overlay';
+import { AppService } from './app.service';
 
 @Component({
   selector: 'app-root',
@@ -9,13 +10,15 @@ import { OverlayContainer } from '@angular/cdk/overlay';
 })
 export class AppComponent {
   title = 'investment-portfolio';
+  showOnlyCurrentAssets = true;
 
 
   @HostBinding('class') className = '';
 
-  toggleControl = new FormControl(true);
+  themeToggleControl = new FormControl(true);
+  assetsToggleControl = new FormControl(true);
 
-  constructor(private overlay: OverlayContainer) { }
+  constructor(private overlay: OverlayContainer, public appService: AppService) { }
 
   ngOnInit(): void {
 
@@ -23,7 +26,7 @@ export class AppComponent {
     const darkClassName = 'darkMode';
     this.className = darkClassName;
     this.overlay.getContainerElement().classList.add(darkClassName);
-    this.toggleControl.valueChanges.subscribe((darkMode) => {
+    this.themeToggleControl.valueChanges.subscribe((darkMode) => {
       this.className = darkMode ? darkClassName : '';
       if (darkMode) {
         this.overlay.getContainerElement().classList.add(darkClassName);
@@ -31,11 +34,16 @@ export class AppComponent {
         this.overlay.getContainerElement().classList.remove(darkClassName);
       }
     });
+
+    this.assetsToggleControl.valueChanges.subscribe((showOnlyCurrentAssets) => {
+      this.showOnlyCurrentAssets = showOnlyCurrentAssets;
+      this.appService.toggleShowCurrentAssets(this.showOnlyCurrentAssets);
+    });
     
   }
 
   updateTheme(val: boolean) {
-    this.toggleControl.setValue(val);
+    this.themeToggleControl.setValue(val);
   }
 
 }

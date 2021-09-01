@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-9 mt-2">
       <div class="d-flex justify-content-between" *ngIf="portfolio.totalPurchase > 0">
-        <div>
+        <div *ngIf="portfolio.totalFees">
           <div class="d-flex align-items-center">
             <div class="totalNumber" *ngIf="portfolio.totalFees<100">{{portfolio.totalFees | currency: 'USD'}}</div>
             <div class="totalNumber" *ngIf="portfolio.totalFees>=100">${{portfolio.totalFees | shortNumber}}</div>
@@ -11,7 +11,7 @@
           </div>
           <div class="totalType">Total Fees</div>
         </div>
-        <div>
+        <div *ngIf="portfolio.totalPurchase">
           <div class="d-flex align-items-center">
             <div class="totalNumber">${{portfolio.totalPurchase  | shortNumber }}</div>
             <mat-icon></mat-icon>
@@ -19,7 +19,7 @@
           <div class="totalType">Total Purchase</div>
         </div>
 
-        <div>
+        <div *ngIf="portfolio.totalSales">
           <div class="d-flex align-items-center">
             <div class="totalNumber">${{portfolio.totalSales  | shortNumber }}</div>
             <mat-icon></mat-icon>
@@ -27,45 +27,45 @@
           <div class="totalType">Total Sales</div>
         </div>
 
-        <div>
+        <div *ngIf="portfolio.totalVolume"> 
           <div class="d-flex align-items-center">
             <div class="totalNumber">${{portfolio.totalVolume  | shortNumber }}</div>
             <mat-icon></mat-icon>
           </div>
           <div class="totalType">Total Volume</div>
         </div>
-        <div>
+        <div *ngIf="portfolio.totalRealizedGainLoss">
           <div class="d-flex align-items-center">
             <div class="totalNumber" [ngClass]="portfolio.totalRealizedGainLoss > 0  ? 'highPrice' : 'lowPrice'">
-              {{portfolio.totalRealizedGainLoss | currency: 'USD'}}</div>
+              ${{portfolio.totalRealizedGainLoss | shortNumber}}</div>
             <mat-icon *ngIf="portfolio.totalRealizedGainLoss > 0" class="positiveIcon">arrow_upward</mat-icon>
             <mat-icon *ngIf="portfolio.totalRealizedGainLoss < 0" class="negativeIcon">arrow_downward</mat-icon>
           </div>
           <div class="totalType">Realized Gain/Loss</div>
         </div>
-        <div>
+        <div *ngIf="portfolio.totalUnrealizedGainLoss">
           <div class="d-flex align-items-center">
             <div class="totalNumber" [ngClass]="portfolio.totalUnrealizedGainLoss > 0  ? 'highPrice' : 'lowPrice'">
-              {{portfolio.totalUnrealizedGainLoss | currency: 'USD'}}</div>
+              ${{portfolio.totalUnrealizedGainLoss | shortNumber}}</div>
             <mat-icon *ngIf="portfolio.totalUnrealizedGainLoss > 0" class="positiveIcon">arrow_upward</mat-icon>
             <mat-icon *ngIf="portfolio.totalUnrealizedGainLoss < 0" class="negativeIcon">arrow_downward</mat-icon>
 
           </div>
           <div class="totalType">Unrealized Gain/Loss</div>
         </div>
-        <div>
+        <div *ngIf="portfolio.totalGainLoss">
           <div class="d-flex align-items-center">
             <div class="totalNumber" [ngClass]="portfolio.totalGainLoss > 0  ? 'highPrice' : 'lowPrice'">
-              {{portfolio.totalGainLoss | currency: 'USD'}}</div>
+              ${{portfolio.totalGainLoss | shortNumber}}</div>
             <mat-icon *ngIf="portfolio.totalGainLoss > 0" class="positiveIcon">arrow_upward</mat-icon>
             <mat-icon *ngIf="portfolio.totalGainLoss < 0" class="negativeIcon">arrow_downward</mat-icon>
 
           </div>
           <div class="totalType">Current Gain/Loss</div>
         </div>
-        <div>
+        <div *ngIf="portfolio.totalCurrentValue">
           <div class="d-flex align-items-center">
-            <div class="totalNumber">{{portfolio.totalCurrentValue | currency: 'USD'}}</div>
+            <div class="totalNumber">${{portfolio.totalCurrentValue | shortNumber}}</div>
             <mat-icon></mat-icon>
           </div>
           <div class="totalType">Current Value</div>
