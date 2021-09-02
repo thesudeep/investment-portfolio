@@ -1,0 +1,71 @@
+<mat-card class="mat-card mat-focus-indicator">
+  <mat-card-title class="mat-card-title">
+    <div class="d-flex align-items-center justify-content-between productInfo">
+      <div class="d-flex align-items-center">
+        <img class='logo' [src]="ticker.imageUrl" />
+        <div class="productName">
+          <div class="tickerSymbol">{{ticker.symbol}}</div>
+          <div class="tickerName">{{ticker.name}}</div>
+        </div>
+      </div>
+      <div class="d-flex align-items-center">
+        <div class="product-price p-1">{{ticker.quotes.price | currency: 'USD': 'symbol': '1.2-4'}}</div>
+        <div class="price-change-font p-1">
+          <app-percent-change [value]="ticker.quotes.percentChange24h"></app-percent-change>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col">
+        <div class="stats-number">{{ticker.quotes.low24h | currency: 'USD': 'symbol': '1.2-4'}}</div>
+        <div class="stats-label">24 Hr Low</div>
+      </div>
+      <div class="col">
+        <div class="stats-number">{{ticker.quotes.high24h | currency: 'USD': 'symbol': '1.2-4'}}</div>
+        <div class="stats-label">24 Hr High</div>
+      </div>
+      <div class="col">
+          <div class="price-change-font">
+            <app-percent-change [value]="ticker.quotes.percentChange1h"></app-percent-change>
+          </div>
+          <div class="stats-label">1 Hr Change</div>
+        </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col">
+        <div class="price-change-font">
+          <app-percent-change [value]="ticker.quotes.percentChange7d"></app-percent-change>
+        </div>
+        <div class="stats-label">7 Day Change</div>
+      </div>
+      <div class="col">
+        <div class="price-change-font">
+          <app-percent-change [value]="ticker.quotes.percentChange30d"></app-percent-change>
+        </div>
+        <div class="stats-label">30 Days Change</div>
+      </div>
+      <div class="col">
+        <div class="price-change-font">
+          <app-percent-change [value]="ticker.quotes.percentChange60d"></app-percent-change>
+        </div>
+        <div class="stats-label">60 Days Change</div>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col">
+        <div class="price-change-font">
+          <app-percent-change [value]="ticker.quotes.percentChange90d"></app-percent-change>
+        </div>
+        <div class="stats-label">90 Days Change</div>
+      </div>
+      <div class="col">
+        <div class="stats-number">{{ticker.quotes.ath | currency: 'USD': 'symbol': '1.2-4'}}</div>
+        <div class="stats-label">All Time High</div>
+      </div>
+      <div class="col">
+        <div class="stats-number">{{ticker.quotes.atl | currency: 'USD': 'symbol': '1.2-4'}}</div>
+        <div class="stats-label">All Time Low</div>
+      </div>
+    </div>
+  </mat-card-title>
+</mat-card>

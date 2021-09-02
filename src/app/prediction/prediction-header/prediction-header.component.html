@@ -1,7 +1,7 @@
 <mat-card>
   <div class="row">
     <div class="col-9 mt-2">
-      <div class="d-flex justify-content-between" *ngIf="portfolio.totalPurchase > 0">
+      <!-- <div class="d-flex justify-content-between" *ngIf="portfolio.totalPurchase > 0">
         <div *ngIf="portfolio.totalFees">
           <div class="d-flex align-items-center">
             <div class="totalNumber" *ngIf="portfolio.totalFees<100">{{portfolio.totalFees | currency: 'USD'}}</div>
@@ -70,7 +70,7 @@
           </div>
           <div class="totalType">Current Value</div>
         </div>
-      </div>
+      </div> -->
 
     </div>
     <div class="col-3 d-flex justify-content-between">
@@ -89,7 +89,7 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
-      <button class="mr-8" mat-icon-button [matMenuTriggerFor]="menu" aria-label="File Upload">
+      <button class="mr-8" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Add Ticker">
         <mat-icon>menu</mat-icon>
       </button>
     </div>
@@ -99,10 +99,10 @@
 <mat-menu #menu="matMenu">
   <button mat-menu-item (click)="openDialog()">
     <mat-icon>file_upload</mat-icon>
-    <span>File Upload</span>
+    <span>Manage Ticker</span>
   </button>
-  <button mat-menu-item (click)="deleteData()">
+  <button mat-menu-item (click)="reset()">
     <mat-icon>delete</mat-icon>
-    <span>Clear</span>
+    <span>Reset</span>
   </button>
 </mat-menu>

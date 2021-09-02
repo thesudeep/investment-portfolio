@@ -1,0 +1,15 @@
+.priceUpColor {
+  color:#009688;
+  
+}
+
+.priceUpColor::before {
+  content: "+";
+}
+
+.priceDownColor {
+  color:#ff4081;
+  ::before {
+    content: "-";
+  }
+}

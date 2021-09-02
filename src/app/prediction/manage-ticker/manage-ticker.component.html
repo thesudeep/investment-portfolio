@@ -1,0 +1,30 @@
+
+<div class="d-flex justify-content-between">
+    <span>Select  {{data.type | titlecase}}</span>
+    <div class="col-3 d-flex justify-content-between">
+            <mat-form-field class="input-field" appearance="fill">
+              <mat-label>Filter By Ticker</mat-label>
+              <input matInput type="text" >
+              <button matSuffix mat-icon-button aria-label="Clear">
+                <mat-icon>close</mat-icon>
+              </button>
+            </mat-form-field>
+    </div>
+</div>
+<div class="container file-list">
+        <div class="row">
+            <div class="col-3 p-2" *ngFor="let ticker of filteredTickers">
+            <mat-checkbox  [checked]="ticker.selected" (change)="updateTicker($event, ticker)">{{ticker.symbol}} 
+              <br/><div class="tickerName">{{ticker.name}} </div></mat-checkbox>
+            </div>
+            <mat-paginator [length]="totalTickers" [pageSize]="defaultRecords" (page)="pageEvent = $event; onPaginateChange($event)">
+            </mat-paginator>
+        </div>
+</div>
+
+<div class="text-center">
+        <button mat-stroked-button color="secondary"  [mat-dialog-close]="true">
+            Close
+        </button>
+</div>
+

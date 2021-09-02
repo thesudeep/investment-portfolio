@@ -10,12 +10,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatButtonModule } from '@angular/material/button';
 import { HttpClientModule } from '@angular/common/http';
-import { ProgressComponent } from './progress/progress.component';
+import { PredictionModule } from './prediction/prediction.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    ProgressComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,
@@ -26,7 +25,8 @@ import { ProgressComponent } from './progress/progress.component';
     MatSlideToggleModule,
     MatButtonModule,
     ReactiveFormsModule,
-    InvestmentModule
+    InvestmentModule,
+    PredictionModule
   ],
   providers: [],
   bootstrap: [AppComponent]
