@@ -19,6 +19,8 @@ export class CryptoComponent implements OnInit {
   public selectedSortedItem: any;
 
   public sortedTickers: any = [];
+  public timeInterval: Subscription;
+
 
   constructor(private http: HttpClient, public dialog: MatDialog, public appService: AppService) { }
 
@@ -82,9 +84,27 @@ export class CryptoComponent implements OnInit {
       window.localStorage.setItem(this.predictionType, JSON.stringify(response));
       this.filteredCryptoData = response.filter((ticker: any) => ticker.selected === true)
       this.sorted();
-    });    
+    });
+
+    this.timeInterval = interval(5000).pipe().subscribe(() => {
+      this.http.get<any>(url).subscribe((response: any) => {
+
+        this.cryptoData.forEach((item: any) => {
+          let updatedTicker = response.data.cryptoCurrencyList.find((cryptoCurrency: any) => cryptoCurrency.id === item.id);
+          if(updatedTicker) {
+            item.quotes = updatedTicker.quotes[0];
+            item.quotes.ath = updatedTicker.ath;
+            item.quotes.atl = updatedTicker.atl;
+            item.quotes.high24h = updatedTicker.high24h;
+            item.quotes.low24h = updatedTicker.low24h;
+          }
+        });
+        this.filteredCryptoData = this.cryptoData.filter((ticker: any) => ticker.selected === true)
+        this.sorted();
 
 
+      })
+    });
 
   }
 
