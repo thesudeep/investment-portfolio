@@ -16,7 +16,6 @@ import { MatSortModule } from '@angular/material/sort';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { PredictionHeaderComponent } from './prediction-header/prediction-header.component';
 import { AssetsCardsComponent } from './assets-cards/assets-cards.component';
-// import { SearchFilterPipe } from './search-filter.pipe';
 import { ManageTickerComponent } from './manage-ticker/manage-ticker.component';
 
 import { SharedModule } from '../shared/shared.module';
@@ -26,7 +25,6 @@ import { CryptoComponent } from './crypto/crypto.component';
   declarations: [
     PredictionHeaderComponent,
     AssetsCardsComponent,
-    // SearchFilterPipe,
     ManageTickerComponent,
     CryptoComponent
 

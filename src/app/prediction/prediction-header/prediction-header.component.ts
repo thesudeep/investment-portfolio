@@ -18,8 +18,8 @@ export class PredictionHeaderComponent {
   @Input() public tickers: any;
   @Input() public type: any;
   @Output() public onReset = new EventEmitter<any>();
-  // @Output() public onFilter = new EventEmitter<any>();
-  // @Output() public onSorted = new EventEmitter<any>();
+  @Output() public onFilter = new EventEmitter<any>();
+  @Output() public onSorted = new EventEmitter<any>();
 
   public searchTerm: string = '';
   public sortedOptions: any;
@@ -28,29 +28,21 @@ export class PredictionHeaderComponent {
     this.sortedOptions = sortedOptions;
   }
 
-  // ngOnChanges(changes: SimpleChanges) {
-  //   if(changes.tickers && changes.tickers.currentValue) {
-
-  //   }
-  //   console.log(changes.current)
-  // }
-
   reset(): void {
     this.onReset.emit();
   }
 
   search(event: any): void {
-    //   this.searchTerm = event.target.value.trim();
-    //   if(this.searchTerm.length>0){
-    //     this.onFilter.emit(this.searchTerm);
-    // }
+      this.searchTerm = event.target.value.trim();
+      this.onFilter.emit(this.searchTerm);
+
   }
 
   sorted(item: any): void {
-    // const selectedSortedItem = this.sortedOptions.find((option: any) => option.value === item.value.value);
-    // if (selectedSortedItem) {
-    //   this.onSorted.emit(selectedSortedItem);
-    // } 
+    const selectedSortedItem = this.sortedOptions.find((option: any) => option.value === item.value.value);
+    if (selectedSortedItem) {
+      this.onSorted.emit(selectedSortedItem);
+    } 
   }
 
   openDialog(): void {
@@ -65,8 +57,8 @@ export class PredictionHeaderComponent {
   }
 
   public clearSearchFilter() {
-    // this.searchTerm = '';
-    // this.onFilter.emit(this.searchTerm);
+    this.searchTerm = '';
+    this.onFilter.emit(this.searchTerm);
   }
 
 }

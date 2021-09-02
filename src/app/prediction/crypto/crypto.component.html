@@ -1,10 +1,9 @@
 <div class="mx-2 mt-2" form="form">
-  <app-prediction-header [type]="'crypto'" [tickers]="cryptoData" (onReset)="reset()"></app-prediction-header>
+  <app-prediction-header [type]="'crypto'" [tickers]="cryptoData" (onReset)="reset()" (onFilter)="filter($event)" (onSorted)="sorted($event)"></app-prediction-header>
 </div>
 
 <div class="row g-0">
-  <div class="col-3 p-2" *ngFor="let ticker of filteredCryptoData">
-    
+  <div class="col-3 p-2" *ngFor="let ticker of sortedTickers | searchFilter: searchTerm: 'name,symbol'">
       <app-assets-cards [ticker]="ticker">
       </app-assets-cards>
     </div>

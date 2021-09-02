@@ -1,6 +1,5 @@
 .priceUpColor {
-  color:#009688;
-  
+  color: rgb(46, 174, 52);
 }
 
 .priceUpColor::before {
@@ -8,8 +7,9 @@
 }
 
 .priceDownColor {
-  color:#ff4081;
-  ::before {
-    content: "-";
-  }
+  color: rgb(249, 103, 45);
+}
+
+.priceDownColor::before {
+  content: "-";
 }

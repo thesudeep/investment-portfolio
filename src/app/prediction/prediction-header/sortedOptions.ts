@@ -1,70 +1,83 @@
 export const sortedOptions = [
+   
     {
       value: 1,
-      text: 'Highest Realized Gain',
-      name: 'totalRealizedGainLoss',
+      text: 'Todays Best',
+      name: 'percentChange24h',
       orderIndex: -1
     },
     {
       value: 2,
-      text: 'Highest Realized Loss',
-      name: 'totalRealizedGainLoss',
+      text: 'Todays Worst',
+      name: 'percentChange24h',
       orderIndex: 1
     },
     {
       value: 3,
-      text: 'Highest Unrealized Gain',
-      name: 'totalUnrealizedGainLoss',
+      text: '1 hr Best',
+      name: 'percentChange1h',
       orderIndex: -1
     },
     {
       value: 4,
-      text: 'Highest Unrealized Loss',
-      name: 'totalUnrealizedGainLoss',
+      text: '1 hr Worst',
+      name: 'percentChange1h',
       orderIndex: 1
     },
     {
       value: 5,
-      text: 'Highest Current Gain',
-      name: 'totalGainLoss',
+      text: '7 Days Best',
+      name: 'percentChange7d',
       orderIndex: -1
     },
     {
       value: 6,
-      text: 'Highest Current Loss',
-      name: 'totalGainLoss',
+      text: '7 Days Worst',
+      name: 'percentChange7d',
       orderIndex: 1
     },
     {
       value: 7,
-      text: 'Highest Current Value',
-      name: 'totalCurrentValue',
+      text: '30 Days Best',
+      name: 'percentChange30d',
       orderIndex: -1
     },
     {
       value: 8,
-      text: 'Highest Fee',
-      name: 'totalFees',
-      orderIndex: -1
+      text: '30 Days Worst',
+      name: 'percentChange30d',
+      orderIndex: 1
     },
     {
       value: 9,
-      text: 'Todays Best',
-      name: 'change',
+      text: '60 Days Best',
+      name: 'percentChange60d',
       orderIndex: -1
     },
     {
       value: 10,
-      text: 'Todays Worst',
-      name: 'change',
+      text: '60 Days Worst',
+      name: 'percentChange60d',
+      orderIndex: 1
+    },
+    {
+      value: 11,
+      text: '90 Days Best',
+      name: 'percentChange90d',
+      orderIndex: -1
+    },
+    {
+      value: 12,
+      text: '90 Days Worst',
+      name: 'percentChange90d',
       orderIndex: 1
     }
   ];
 
 
   export const defaultSelectedOption =  {
-    value: 7,
-    text: 'Highest Current Value',
-    name: 'totalCurrentValue',
+    value: 1,
+    text: 'Todays Best',
+    name: 'percentChange24h',
     orderIndex: -1
   }

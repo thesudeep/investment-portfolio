@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { HttpClient } from '@angular/common/http';
 import { Observable, Subscription, interval } from 'rxjs';
 import { AppService } from 'src/app/app.service';
+import { defaultSelectedOption } from '../prediction-header/sortedOptions';
 
 @Component({
   selector: 'app-crypto',
@@ -14,16 +15,21 @@ export class CryptoComponent implements OnInit {
   predictionType = "cryptoData";
   cryptoData: any[] = [];
   filteredCryptoData: any[] = [];
-  
+  public searchTerm: string = '';
+  public selectedSortedItem: any;
+
+  public sortedTickers: any = [];
 
   constructor(private http: HttpClient, public dialog: MatDialog, public appService: AppService) { }
 
   ngOnInit(): void {
+    this.selectedSortedItem = defaultSelectedOption;
+
     let cryptData = window.localStorage.getItem(this.predictionType);
     if (cryptData) {
       this.cryptoData = JSON.parse(cryptData);
-      console.log(this.cryptoData)
-      this.filteredCryptoData = this.cryptoData.filter((ticker: any) => ticker.selected === true)
+      this.filteredCryptoData = this.cryptoData.filter((ticker: any) => ticker.selected === true);
+      this.sorted();
     }
 
     let existingPortfolio = new Set();
@@ -46,7 +52,6 @@ export class CryptoComponent implements OnInit {
 
     let url = 'https://api.coinmarketcap.com/data-api/v3/cryptocurrency/listing?start=1&limit=1000&sortBy=market_cap&sortType=desc&convert=USD&audited=false&aux=ath,atl,high24h,low24h,num_market_pairs,cmc_rank,date_added,tags,platform,max_supply,circulating_supply,total_supply,volume_7d,volume_30d';
     this.http.get<any>(url).subscribe((response: any) => {
-      console.log(response)
       let existingTickers = [... new Set(existingPortfolio)]
       if (this.cryptoData.length === 0) {
         response.data.cryptoCurrencyList.forEach((ticker: any) => {
@@ -68,13 +73,15 @@ export class CryptoComponent implements OnInit {
         });
         window.localStorage.setItem(this.predictionType, JSON.stringify(this.cryptoData));
         this.filteredCryptoData = this.cryptoData.filter((ticker: any) => ticker.selected === true)
+        this.sorted();
+
       }
     })
 
     this.appService.manageCryptoSubject.subscribe((response: any) => {
       window.localStorage.setItem(this.predictionType, JSON.stringify(response));
       this.filteredCryptoData = response.filter((ticker: any) => ticker.selected === true)
-
+      this.sorted();
     });    
 
 
@@ -90,10 +97,20 @@ export class CryptoComponent implements OnInit {
   }
 
   filter(filterText: string): void {
+    this.searchTerm = filterText;
   }
 
   sorted(selectedSortedItem?: any): void {
-
+    if (selectedSortedItem) {
+      this.selectedSortedItem = selectedSortedItem;
+    }
+    let sortedTickers = this.filteredCryptoData.sort((a: any, b: any) => {
+      if (this.selectedSortedItem.orderIndex > 0) {
+        return a["quotes"][this.selectedSortedItem.name] - b["quotes"][this.selectedSortedItem.name];
+      }
+      return b["quotes"][this.selectedSortedItem.name] - a["quotes"][this.selectedSortedItem.name];
+    })
+    this.sortedTickers = [...sortedTickers];
   }
 
 }

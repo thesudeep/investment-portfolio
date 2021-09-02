@@ -187,7 +187,6 @@ export class CoinbaseComponent implements OnInit {
       this.portfolio.totalSales = totalSales;
       this.portfolio.totalVolume = totalVolume;
       this.sorted();
-      console.log(this.portfolio);
     });
   }
 

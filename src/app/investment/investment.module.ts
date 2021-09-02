@@ -16,7 +16,6 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { PortfolioHeaderComponent } from './portfolio-header/portfolio-header.component';
 import { CoinbaseComponent } from './coinbase/coinbase.component';
 import { AssetsCardsComponent } from './assets-cards/assets-cards.component';
-import { SearchFilterPipe } from './search-filter.pipe';
 import { FileUploadComponent } from './file-upload/file-upload.component';
 import { TransactionDetailsComponent } from './transaction-details/transaction-details.component';
 import { SharedModule } from '../shared/shared.module';
@@ -28,7 +27,6 @@ import { BinanceComponent } from './binance/binance.component';
     CoinbaseComponent,
     BinanceComponent,
     AssetsCardsComponent,
-    SearchFilterPipe,
     FileUploadComponent,
     TransactionDetailsComponent
 

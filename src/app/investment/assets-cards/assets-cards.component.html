@@ -1,37 +1,21 @@
 <mat-card class="mat-card mat-focus-indicator">
   <mat-card-title class="mat-card-title">
-    <div class="d-flex align-items-center justify-content-between productInfo">
+    <div class="d-flex align-items-center justify-content-between">
       <div class="d-flex align-items-center">
         <img class='logo' [src]="logoUrl" />
         <div class="productName">{{ticker}}
-            <div *ngIf="transaction.change" class="d-flex align-items-center" [ngClass]="transaction.change > 0  ? 'highPrice' : 'lowPrice'">
-                <div class="change-text">{{transaction.change | number : '1.2-2'}}%</div>
-                <mat-icon *ngIf="transaction.change > 0" class="change-icon positiveIcon">arrow_upward</mat-icon>
-                <mat-icon *ngIf="transaction.change < 0" class="change-icon negativeIcon">arrow_downward</mat-icon>
-            </div>
-            <div *ngIf="!transaction.change" class="d-flex align-items-center">
-                <div class="change-text">{{transaction.stats.current | currency: 'USD': 'symbol': '1.2-4'}}</div>
-            </div>
+          <div *ngIf="transaction.change" class="d-flex align-items-center current-price-change-font">
+            <app-percent-change [value]="transaction.change"></app-percent-change>
+          </div>
+          <div *ngIf="!transaction.change" class="d-flex align-items-center">
+            <div>{{transaction.stats.current | currency: 'USD': 'symbol': '1.2-4'}}</div>
+          </div>
         </div>
       </div>
 
       <div class="d-flex align-items-center product-stats" *ngIf="transaction.stats.volume">
-        <div *ngIf="transaction.change">
-          <div
-            [ngClass]="transaction.stats.current > transaction.stats.open  ? 'highPrice' : 'lowPrice'"
-            class="price">
-            {{transaction.stats.current | currency: 'USD': 'symbol': '1.2-4'}}
-          </div>
-          <div>
-            Current
-          </div>
-
-        </div>
-
         <div>
-          <div
-            [ngClass]="transaction.stats.current > transaction.stats.open  ? 'highPrice' : 'lowPrice'"
-            class="price">
+          <div class="price">
             {{transaction.stats.open | currency: 'USD': 'symbol': '1.2-4'}}
           </div>
           <div>
@@ -41,9 +25,7 @@
         </div>
 
         <div>
-          <div
-            [ngClass]="transaction.stats.current > transaction.stats.open  ? 'highPrice' : 'lowPrice'"
-            class="price">
+          <div class="price">
             {{transaction.stats.low | currency: 'USD': 'symbol': '1.2-4'}}
           </div>
           <div>
@@ -53,9 +35,7 @@
         </div>
 
         <div>
-          <div
-            [ngClass]="transaction.stats.current > transaction.stats.open  ? 'highPrice' : 'lowPrice'"
-            class="price">
+          <div class="price">
             {{transaction.stats.high | currency: 'USD': 'symbol': '1.2-4'}}
           </div>
           <div>
@@ -65,9 +45,7 @@
         </div>
 
         <div>
-          <div
-            [ngClass]="transaction.stats.current > transaction.stats.open  ? 'highPrice' : 'lowPrice'"
-            class="price">
+          <div class="price">
             {{transaction.stats.volume | shortNumber}}
           </div>
           <div>
@@ -75,6 +53,27 @@
           </div>
 
         </div>
+
+        <div>
+          <div class="price">
+            {{transaction.totalFees | currency: 'USD'}}
+          </div>
+          <div>
+            Fees
+          </div>
+        </div>
+
+        <div *ngIf="transaction.change">
+          <div [ngClass]="{'priceUpColor': (transaction.change>0), 'priceDownColor': (transaction.change<0)}"
+            class="price">
+            {{transaction.stats.current | currency: 'USD': 'symbol': '1.2-4'}}
+          </div>
+          <div>
+            Current
+          </div>
+
+        </div>
+
       </div>
       <button mat-icon-button [matMenuTriggerFor]="appMenu" class="align-self-start">
         <mat-icon>more_vert</mat-icon>
@@ -85,53 +84,46 @@
 
   </mat-card-title>
   <mat-card-content>
-    <div class="d-flex justify-content-between pt-1">
-      <div>
+    <div class="row pt-3">
+      <div class="col">
         <div class="d-flex align-items-center">
           <div class="totalNumber">{{transaction.remaining | number : '1.2-2'}}</div>
           <mat-icon></mat-icon>
         </div>
         <div class="totalType">Remaining</div>
       </div>
-      <div>
+      <div class="col">
         <div class="d-flex align-items-center">
-          <div class="totalNumber">{{transaction.totalFees | currency: 'USD'}}</div>
-          <mat-icon></mat-icon>
-        </div>
-        <div class="totalType">Fees</div>
-      </div>
-      <div>
-        <div class="d-flex align-items-center">
-          <div class="totalNumber">{{transaction.totalRealizedGainLoss | currency: 'USD'}}1</div>
-          <mat-icon *ngIf="transaction.totalRealizedGainLoss > 0" class="positiveIcon">arrow_upward</mat-icon>
-          <mat-icon *ngIf="transaction.totalRealizedGainLoss < 0" class="negativeIcon">arrow_downward</mat-icon>
+          <div class="totalNumber"
+            [ngClass]="{'priceUpColor': (transaction.totalRealizedGainLoss > 0), 'priceDownColor': (transaction.totalRealizedGainLoss < 0)}">
+            {{transaction.totalRealizedGainLoss | currency: 'USD'}}1</div>
         </div>
         <div class="totalType">Realized Gain/Loss</div>
       </div>
-      <div>
+      <div class="col">
         <div class="d-flex align-items-center">
-          <div class="totalNumber">{{transaction.totalUnrealizedGainLoss | currency: 'USD'}}</div>
-          <mat-icon *ngIf="transaction.totalUnrealizedGainLoss > 0" class="positiveIcon">arrow_upward</mat-icon>
-          <mat-icon *ngIf="transaction.totalUnrealizedGainLoss < 0" class="negativeIcon">arrow_downward</mat-icon>
+          <div class="totalNumber"
+            [ngClass]="{'priceUpColor': (transaction.totalUnrealizedGainLoss > 0), 'priceDownColor': (transaction.totalUnrealizedGainLoss < 0)}">
+            {{transaction.totalUnrealizedGainLoss | currency: 'USD'}}</div>
         </div>
         <div class="totalType">Unrealized Gain/Loss</div>
       </div>
-      <div>
+      <div class="col">
         <div class="d-flex align-items-center">
-          <div class="totalNumber">{{transaction.totalGainLoss | currency: 'USD'}}</div>
-          <mat-icon *ngIf="transaction.totalGainLoss > 0" class="positiveIcon">arrow_upward</mat-icon>
-          <mat-icon *ngIf="transaction.totalGainLoss < 0" class="negativeIcon">arrow_downward</mat-icon>
+          <div class="totalNumber"
+            [ngClass]="{'priceUpColor': (transaction.totalGainLoss > 0), 'priceDownColor': (transaction.totalGainLoss < 0)}">
+            {{transaction.totalGainLoss | currency: 'USD'}}</div>
         </div>
         <div class="totalType">Current Gain/Loss</div>
       </div>
-      <div>
+      <div class="col">
         <div class="d-flex align-items-center">
           <div class="totalNumber">{{transaction.totalCurrentValue | currency: 'USD'}}</div>
           <mat-icon></mat-icon>
         </div>
         <div class="totalType">Current Value</div>
       </div>
-    </div>  
+    </div>
   </mat-card-content>
 </mat-card>
 

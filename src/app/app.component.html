@@ -31,18 +31,19 @@
       </svg>
     </div>
     <div class="d-flex align-items-center">
-        <button mat-stroked-button color="primary" class="m-2" [routerLink]="['/coinbase']" routerLinkActive="active-link">Coinbase</button>
-        <button mat-stroked-button color="primary" class="m-2" [routerLink]="['/binance']" routerLinkActive="active-link">Binance</button>
-        <button mat-stroked-button color="primary" class="m-2" [routerLink]="['/robinhood']" routerLinkActive="active-link">Robinhood</button>
-        <button mat-stroked-button color="primary" class="m-2" [routerLink]="['/cryptoprediction']" routerLinkActive="active-link">Crypto Prediction</button>
-        <button mat-stroked-button color="primary" class="m-2" [routerLink]="['/stockprediction']" routerLinkActive="active-link">Stock Prediction</button>
-        <mat-slide-toggle [formControl]="themeToggleControl" class="m-2">
-          {{themeToggleControl.value === true ? 'Dark Theme' : 'Light Theme'}}
-        </mat-slide-toggle>
-        <mat-slide-toggle [formControl]="assetsToggleControl" class="m-2">
-          {{assetsToggleControl.value === true ? 'Current Holdings' : 'All Holdings'}}
-        </mat-slide-toggle>
-
+      <button mat-stroked-button color="primary" class="m-2" [routerLink]="['/coinbase']"
+        routerLinkActive="active-link">Coinbase</button>
+      <button mat-stroked-button color="primary" class="m-2" [routerLink]="['/binance']"
+        routerLinkActive="active-link">Binance</button>
+      <button mat-stroked-button color="primary" class="m-2" [routerLink]="['/robinhood']"
+        routerLinkActive="active-link">Robinhood</button>
+      <button mat-stroked-button color="primary" class="m-2" [routerLink]="['/cryptoprediction']"
+        routerLinkActive="active-link">Crypto Prediction</button>
+      <button mat-stroked-button color="primary" class="m-2" [routerLink]="['/stockprediction']"
+        routerLinkActive="active-link">Stock Prediction</button>
+      <mat-slide-toggle [formControl]="assetsToggleControl" class="m-2">
+        {{assetsToggleControl.value === true ? 'Current Holdings' : 'All Holdings'}}
+      </mat-slide-toggle>
     </div>
   </nav>
   <router-outlet></router-outlet>
