@@ -1,7 +1,7 @@
 <mat-card class="mat-card mat-focus-indicator">
   <mat-card-title class="mat-card-title">
     <div class="d-flex align-items-center justify-content-between productInfo">
-      <div class="d-flex align-items-center">
+      <div class="d-flex align-items-center" (click)='openDetails(ticker)'>
         <img class='logo' [src]="ticker.imageUrl" />
         <div>
           <div class="tickerSymbol">{{ticker.symbol}}</div>

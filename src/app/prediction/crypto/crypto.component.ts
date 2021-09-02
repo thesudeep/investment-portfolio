@@ -19,7 +19,7 @@ export class CryptoComponent implements OnInit {
   public selectedSortedItem: any;
 
   public sortedTickers: any = [];
-  public timeInterval: Subscription;
+  public timeInterval: Subscription  = new Subscription();
 
 
   constructor(private http: HttpClient, public dialog: MatDialog, public appService: AppService) { }
@@ -101,14 +101,12 @@ export class CryptoComponent implements OnInit {
         });
         this.filteredCryptoData = this.cryptoData.filter((ticker: any) => ticker.selected === true)
         this.sorted();
-
-
       })
     });
-
   }
 
   ngOnDestroy() {
+    this.timeInterval.unsubscribe();
   }
 
   reset(): void {

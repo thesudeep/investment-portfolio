@@ -25,6 +25,10 @@ export class AssetsCardsComponent {
     this.logoUrl = logos.find((logo: any) => logo.ticker === this.ticker)? logos.find((logo: any) => logo.ticker === this.ticker).url : '';
   }
 
+  openDetails(ticker: any) {
+    window.open('https://coinmarketcap.com/currencies/'+ticker.name, '_blank');
+  }
+
 
 
 }

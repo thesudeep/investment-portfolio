@@ -21,7 +21,7 @@ export class BinanceComponent implements OnInit {
 
   public selectedSortedItem: any;
 
-  public timeInterval: Subscription;
+  public timeInterval: Subscription = new Subscription();
 
   constructor(private http: HttpClient, public dialog: MatDialog, public appService: AppService) { }
 
