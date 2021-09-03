@@ -26,7 +26,7 @@ export class AssetsCardsComponent {
   }
 
   openDetails(ticker: any) {
-    window.open('https://coinmarketcap.com/currencies/'+ticker.name, '_blank');
+    window.open('https://coinmarketcap.com/currencies/'+ticker.name.replace(" ", "-"), '_blank');
   }
 
 

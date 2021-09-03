@@ -38,7 +38,7 @@ export class ManageTickerComponent implements OnInit {
   }
 
   updateTicker($event: any, ticker: any) {
-    this.data.tickers.find((ticker: any) => ticker.id === ticker.id).selected = $event.checked;
+    this.data.tickers.find((item: any) => item.id === ticker.id).selected = $event.checked;
     this.appService.manageCrypto(this.data.tickers);
   }
 
