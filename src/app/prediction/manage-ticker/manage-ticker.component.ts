@@ -14,39 +14,36 @@ export class ManageTickerComponent implements OnInit {
   totalTickers = 1;
   defaultRecords: any = 40;
   pageEvent: any;
+  public searchTerm: string = '';
+
   constructor(public dialogRef: MatDialogRef<ManageTickerComponent>, @Inject(MAT_DIALOG_DATA) public data: any, public appService: AppService) { }
 
   ngOnInit(): void {
     this.totalTickers = this.data.tickers.length;
-    // if(this.data.type === 'coinbase') {
-    //   this.brokerType = 'coinbaseData';
-    //   let localData = window.localStorage.getItem(this.brokerType);
-    //   if(localData) {
-    //     this.coinbaseData = JSON.parse(localData);
-    //   }
-    // } else if(this.data.type === 'binance') {
-    //   this.brokerType = 'binanceData';
-    //   let localData = window.localStorage.getItem(this.brokerType);
-    //   if(localData) {
-    //     this.binanceData = JSON.parse(localData);
-    //   }
-    // } 
-    this.filteredTickers = this.data.tickers.slice(0, this.defaultRecords);
+    this.filteredTickers = this.data.tickers.filter((item: any) => item['symbol'].search(new RegExp(this.searchTerm, 'i')) > -1).slice(0, this.defaultRecords);
 
   }
 
   onPaginateChange(data: any) {
-    this.filteredTickers = this.data.tickers.slice(data.pageIndex * data.pageSize, data.pageIndex*data.pageSize + data.pageSize);
+    this.filteredTickers = this.data.tickers.filter((item: any) => item['symbol'].search(new RegExp(this.searchTerm, 'i')) > -1).slice(data.pageIndex * data.pageSize, data.pageIndex * data.pageSize + data.pageSize);
   }
 
+  search(event: any): void {
+    this.searchTerm = event.target.value.trim();
+    this.filteredTickers = this.data.tickers.filter((item: any) => item['symbol'].search(new RegExp(this.searchTerm, 'i')) > -1).slice(0, this.defaultRecords);
+  }
 
   close(): void {
     this.dialogRef.close();
   }
 
   updateTicker($event: any, ticker: any) {
-    this.data.tickers.find((ticker:any)=> ticker.id === ticker.id).selected = $event.checked;
+    this.data.tickers.find((ticker: any) => ticker.id === ticker.id).selected = $event.checked;
     this.appService.manageCrypto(this.data.tickers);
+  }
+
+  clearSearchFilter() {
+    this.filteredTickers = this.data.tickers.slice(0, this.defaultRecords);
   }
 
 }

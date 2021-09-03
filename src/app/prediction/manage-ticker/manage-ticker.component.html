@@ -4,8 +4,8 @@
     <div class="col-3 d-flex justify-content-between">
             <mat-form-field class="input-field" appearance="fill">
               <mat-label>Filter By Ticker</mat-label>
-              <input matInput type="text" >
-              <button matSuffix mat-icon-button aria-label="Clear">
+              <input matInput type="text" [value]="searchTerm" (input)="search($event)">
+              <button matSuffix mat-icon-button aria-label="Clear" (click)="clearSearchFilter()">
                 <mat-icon>close</mat-icon>
               </button>
             </mat-form-field>
