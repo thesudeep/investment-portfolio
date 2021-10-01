@@ -296,6 +296,10 @@ export const logos: any[] =   [
     {
       ticker: "ICX",
       url: "https://dynamic-assets.coinbase.com/598a40672dfc7459adfe8df195be330310f3776f0fe3a30930e0f2d237cd403bdd40db1544c949ef01ae8553aa5549d64b7e44d038223f2650999a3bf5a1dd4b/asset_icons/3af4b33bde3012fd29dd1366b0ad737660f24acc91750ee30a034a0679256d0b.png"
+    },
+    {
+      ticker: "QUICK",
+      url: "https://dynamic-assets.coinbase.com/705535e32c752a5b508fbb4b687be562e0d2028432f09cf40ea54a48fbb9beacbed86b63d8a5994874d453461a1bcb381dbda524c3ce9ff5b8b1624bee857bff/asset_icons/c261de765d9ea125680ab5304af562eeb64c3532f9c7efb25943ff931abafb6b.png"
     }
 
 
