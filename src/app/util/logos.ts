@@ -300,6 +300,18 @@ export const logos: any[] =   [
     {
       ticker: "QUICK",
       url: "https://dynamic-assets.coinbase.com/705535e32c752a5b508fbb4b687be562e0d2028432f09cf40ea54a48fbb9beacbed86b63d8a5994874d453461a1bcb381dbda524c3ce9ff5b8b1624bee857bff/asset_icons/c261de765d9ea125680ab5304af562eeb64c3532f9c7efb25943ff931abafb6b.png"
+    },
+    {
+      ticker: "ASM",
+      url: "https://dynamic-assets.coinbase.com/1afd68c76a43ae87602a1bd96bdf148f444b2419fa63c20059d1921f3d56188d9ad9302338ac68e4f2472fdcbe7e1a5b1b0ad242223373914cba30889745daf0/asset_icons/05e976495eb3ce19565a67e763008cac182002dc4d1fd1417332378a3c3a46b8.png"
+    },
+    {
+      ticker: "DDX",
+      url: "https://dynamic-assets.coinbase.com/adc1256e1ee2cda7961307c6840b637e6417b53e68ccf0341965247c7f1bf3d8520390ed24a726bc8fa93b4542f94ebbe8d07433c6faa3c87cc85f77229e421f/asset_icons/fc4ece2ec136d2fd7b2834703804d9784f4bf15ee909e8b09d19f145522b7ea5.png"
+    },
+    {
+      ticker: "SHIB",
+      url: "https://dynamic-assets.coinbase.com/c14c8dc36c003113c898b56dfff649eb0ff71249fd7c8a9de724edb2dedfedde5562ba4a194db8433f2ef31a1e879af0727e6632751539707b17e66d63a9013b/asset_icons/a7309384448163db7e3e9fded23cd6ecf3ea6e1fb3800cab216acb7fc85f9563.png"
     }
 
 
