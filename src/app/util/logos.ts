@@ -312,6 +312,10 @@ export const logos: any[] =   [
     {
       ticker: "SHIB",
       url: "https://dynamic-assets.coinbase.com/c14c8dc36c003113c898b56dfff649eb0ff71249fd7c8a9de724edb2dedfedde5562ba4a194db8433f2ef31a1e879af0727e6632751539707b17e66d63a9013b/asset_icons/a7309384448163db7e3e9fded23cd6ecf3ea6e1fb3800cab216acb7fc85f9563.png"
+    },
+    {
+      ticker: "KRL",
+      url: "https://dynamic-assets.coinbase.com/c4a7ee26997ce672a5ab5979f2a9b17205fba90c81da9242f07ce0362b6466e5a263252843085cbb806c6f2e86d7250c6bb975ad5424682dcb7cc56735f699b9/asset_icons/465a137727112f624f353fc7e66d7a30c2e4b32be252753c30ddc1a0e6bc6297.png"
     }
 
 
