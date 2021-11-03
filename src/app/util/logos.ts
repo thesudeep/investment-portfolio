@@ -316,6 +316,10 @@ export const logos: any[] =   [
     {
       ticker: "KRL",
       url: "https://dynamic-assets.coinbase.com/c4a7ee26997ce672a5ab5979f2a9b17205fba90c81da9242f07ce0362b6466e5a263252843085cbb806c6f2e86d7250c6bb975ad5424682dcb7cc56735f699b9/asset_icons/465a137727112f624f353fc7e66d7a30c2e4b32be252753c30ddc1a0e6bc6297.png"
+    },
+    {
+      ticker: "TRAC",
+      url: "https://dynamic-assets.coinbase.com/9e361915722ae12dbd3579bea34eda12c9efceef15dec8dcb21255885d05a75e174edc216cfa886a1b7ea904018f5f1319227fb72e96207c9e21bfb547a4aa87/asset_icons/373db13f96592643c2151dd7c17ee375143a5826070b30ba23034a950dfecbf7.png"
     }
 
 
