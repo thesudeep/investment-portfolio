@@ -320,8 +320,9 @@ export const logos: any[] =   [
     {
       ticker: "TRAC",
       url: "https://dynamic-assets.coinbase.com/9e361915722ae12dbd3579bea34eda12c9efceef15dec8dcb21255885d05a75e174edc216cfa886a1b7ea904018f5f1319227fb72e96207c9e21bfb547a4aa87/asset_icons/373db13f96592643c2151dd7c17ee375143a5826070b30ba23034a950dfecbf7.png"
+    },
+    {
+      ticker: "BICO",
+      url: "https://dynamic-assets.coinbase.com/c13497348b928a13af38dc4bbdec2b7ab076f5ad3afc90a31c7c00ed850fff90b955bb2abda292c40e8e1ec6d6f4afd0394c1a40f9eee22fcaf4c522793fd433/asset_icons/5c78d3e386b7a2580a150dc01c6c1e1cb21192dc939badcd422c8742b4e9a11c.png"
     }
-
-
-
   ];
