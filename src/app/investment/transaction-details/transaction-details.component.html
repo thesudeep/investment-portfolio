@@ -32,7 +32,7 @@
 
         <div>
             <div class="totalNumber">
-                {{data.transaction.totalPurchase | currency: 'USD'}}
+                {{data.transaction.totalFees | currency: 'USD'}}
             </div>
             <div class="totalType">
                 Fees
@@ -101,7 +101,9 @@
             matSortDisableClear matSortDirection="desc">
             <ng-container matColumnDef="type">
                 <th mat-header-cell *matHeaderCellDef>Type</th>
-                <td mat-cell *matCellDef="let row">{{row.type}}</td>
+                <td mat-cell *matCellDef="let row">
+                    <span [ngClass]="{'buy': row.type === 'BUY', 'sell': row.type === 'SELL'}">{{row.type}}</span>
+                </td>
             </ng-container>
 
             <ng-container matColumnDef="unitPrice">
