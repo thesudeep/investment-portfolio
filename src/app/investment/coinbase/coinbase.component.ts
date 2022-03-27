@@ -205,11 +205,11 @@ export class CoinbaseComponent implements OnInit {
   private getStats(productStats: any, ticker: string) {
     let stats = productStats[`${ticker}-USD`] || productStats[`${ticker}-USDC`];
     return {
-      current: stats.stats_24hour.last,
-      open: stats.stats_24hour.open,
-      low: stats.stats_24hour.low,
-      high: stats.stats_24hour.high,
-      volume: stats.stats_24hour.volume
+      current: stats? stats.stats_24hour.last: '',
+      open: stats? stats.stats_24hour.open: '', 
+      low: stats? stats.stats_24hour.low: '',
+      high: stats? stats.stats_24hour.high: '',
+      volume: stats? stats.stats_24hour.volume: ''
     };
   }
 
